@@ -6,4 +6,5 @@ RUN mkdir /tmp/docker
 RUN touch /tmp/docker/test.txt
 
 EXPOSE 80
-CMD /usr/sbin/nginx -g "daemon off;"
+CMD ["/usr/sbin/nginx", "-g", "daemon off;"]  ## JSON Format
+# CMD /usr/sbin/nginx -g "daemon off;"  ## Shell Format

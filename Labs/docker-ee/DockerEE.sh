@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # replace the below sample URL with your's
-DOCKER_EE_URL="https://storebits.docker.com/ee/trial/sub-c12cb585-d245-4d63-a1bf-04f69a8967ce"
+## goto https://store.docker.com/my-content to find the url
+DOCKER_EE_URL="https://storebits.docker.com/ee/trial/sub-afa5ffd4-9d4c-488e-a10c-d44e8eaf1d8c"
 DOCKER_EE_VERSION=18.09
 
 ## Install required packages
