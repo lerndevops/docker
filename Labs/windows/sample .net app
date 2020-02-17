@@ -11,7 +11,7 @@ ASP.NET Core apps can run on .NET Core or on the full .NET Framework
 Designed to provide an optimized development framework for apps that are deployed to the cloud or run on-premises
 Modular components with minimal overhead retain flexibility while constructing your solutions
 Prerequisites
-This example assumes you already have an ASP.NET Core app on your machine. If you are new to ASP.NET you can follow a simple tutorial to initialize a project or clone our ASP.NET Docker Sample.
+This example assumes you already have an ASP.NET Core app on your machine. If you are new to ASP.NET you can follow a simple tutorial to initialize a project or clone our ASP.NET (https://github.com/dotnet/dotnet-docker/tree/master/samples/aspnetapp)Docker Sample.
 
 Create a Dockerfile for an ASP.NET Core application
 Create a Dockerfile in your project folder.
