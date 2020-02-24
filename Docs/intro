@@ -1,0 +1,42 @@
+What is Docker?
+Docker:
+	•	Docker, Inc. the company
+	•	Docker, the container runtime and orchestration engine
+	•	Docker, the open-source project (Moby)
+The Company
+Docker, Inc.:
+	•	Based in San Francisco
+	•	Founded by Solomon Hykes
+	•	Start as a PaaS provider called dotCloud
+	•	dotCloud leveraged Linux containers
+	•	Their internal tool used to manage containers was nick-named Docker
+	•	In 2013 dotCloud was rebranded as Docker
+The Runtime and Orchestration Engine
+The Docker runtime and orchestration engine:
+	•	Most people are referring to the Docker Engine
+	•	Two main editions:
+	◦	Enterprise Edition (EE)
+	◦	Community Edition (CE)
+
+The Open-Source Project
+Moby:
+	•	The upstream project of Docker
+	•	Breaks Docker down into more modular components
+	•	Code is available on GitHub:
+	◦	https://github.com/moby/moby
+Why Use Docker?
+Docker Use Cases:
+	•	Dev/Prod parity:
+	◦	Dev and Production environment are the same
+	◦	Bugs in Production can be replicated in Development
+	•	Simplifying Configuration:
+	◦	Lets you put your environment and configuration into code and deploy it
+	◦	Allows the same Docker configuration to be used in a variety of environments
+	◦	Decouples infrastructure requirements from the application environment
+	•	Code Pipeline Management:
+	◦	Build standards and repeatable processes
+	•	Developer Productivity
+	•	App Isolation
+	•	Server Consolidation
+	•	Debugging Capabilities
+	•	Multi-tenancy
