@@ -2,8 +2,8 @@
 
 # replace the below sample URL with your's
 ## goto https://store.docker.com/my-content to find the url
-DOCKER_EE_URL="https://storebits.docker.com/ee/trial/sub-afa5ffd4-9d4c-488e-a10c-d44e8eaf1d8c"
-DOCKER_EE_VERSION=18.09
+DOCKER_EE_URL="https://storebits.docker.com/ee/trial/sub-00145550-d0a4-4490-8f36-1144b73ac894"
+DOCKER_EE_VERSION=19.03
 
 ## Install required packages
 sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common
