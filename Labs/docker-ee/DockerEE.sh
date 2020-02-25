@@ -14,4 +14,5 @@ sudo add-apt-repository "deb [arch=$(dpkg --print-architecture)] $DOCKER_EE_URL/
 
 ## Install Docker EE
 sudo apt-get update
-sudo apt-get install -y docker-ee=5:18.09.4~3-0~ubuntu-bionic
+sudo apt-get install -y docker-ee=5:19.03.4~3-0~ubuntu-bionic
+
