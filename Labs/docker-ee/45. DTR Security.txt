@@ -1,0 +1,20 @@
+There are a few special features of Docker Trusted Registry that you may need to be aware of for the Docker Certified Associate. In this lesson, we will briefly discuss security scanning and tag immutability in the context of DTR. We will push an image to DTR and explore these features within the DTR web interface.
+
+Relevant Documentation
+https://docs.docker.com/datacenter/dtr/2.4/guides/admin/configure/set-up-vulnerability-scans/
+https://docs.docker.com/ee/dtr/user/manage-images/prevent-tags-from-being-overwritten/
+Lesson Reference
+Turn on vulnerability scanning. Choose Online under Select a method for installation and updates.. It will take come time to update the vulnerability database and perform scans.
+
+Trust the DTR certificate and authenticate the local daemon against DTR.
+
+curl -k https://<DTR server private IP>:443/ca > dtr.crt
+sudo mkdir -p /etc/docker/certs.d/<DTR server private IP>
+sudo cp dtr.crt /etc/docker/certs.d/<DTR server private IP>/
+docker login <DTR server private IP>
+Pull an image, re-tag it, and push it to DTR.
+
+docker pull alpine:latest
+docker tag alpine:latest <DTR server private IP>/admin/alpine:latest
+docker push <DTR server private IP>/admin/alpine:latest
+Within DTR, you can now locate your new tag and perform a vulnerability scan.

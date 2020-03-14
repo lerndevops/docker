@@ -1,0 +1,12 @@
+Universal Control Plane and Docker trusted Registry have some built-in features for managing different kinds of certificates via the UI. For example, in both UCP and DTR, you can provide your own external certificates via the UI to replace the self-signed certificates generated during the installation process. You can also download client bundles in UCP, archives which contain client certificates and configuration scripts, making it easy to set up your local environment to authenticate and interact with UCP via the command line. In this lesson, we will briefly introduce these concepts and demonstrate how to access these features via the UCP and DTR web interfaces.
+
+Relevant Documentation
+https://docs.docker.com/ee/ucp/admin/configure/use-your-own-tls-certificates/#configure-ucp-to-use-your-own-tls-certificates-and-keys
+https://docs.docker.com/ee/dtr/admin/configure/use-your-own-tls-certificates/
+https://docs.docker.com/ee/ucp/user-access/cli/
+Lesson Reference
+To upload your own certificates in UCP, go to admin, Admin Settings, then Certificates.
+
+In DTR, click System, General, then under Domain & Proxies select Show TLS settings.
+
+To generate client bundles in UCP, go to admin, My Profile, Client Bundles.

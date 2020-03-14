@@ -1,0 +1,84 @@
+Backups are an important task when maintaining any system, including a UCP cluster. In this lesson, we will demonstrate how to back up and restore both Universal Control Plane and Docker Trusted Registry.
+
+Relevant Documentation
+https://docs.docker.com/engine/swarm/admin_guide/#back-up-the-swarm
+https://docs.docker.com/datacenter/ucp/2.2/guides/admin/backups-and-disaster-recovery/
+https://docs.docker.com/datacenter/dtr/2.3/guides/admin/backups-and-disaster-recovery/
+Lesson Reference
+Back up UCP
+On the UCP server, get your UCP instance ID.
+
+docker container run --rm \
+  --name ucp \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  docker/ucp:3.1.5 \
+  id
+Create an encrypted backup. Enter your UCP instance ID from the previous command for the --id flag.
+
+docker container run \
+  --log-driver none --rm \
+  --interactive \
+  --name ucp \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  docker/ucp:3.1.5 backup \
+  --passphrase "secretsecret" \
+  --id <Your UCP instance ID> > /home/cloud_user/ucp-backup.tar
+List the contents of the backup file.
+
+gpg --decrypt /home/cloud_user/ucp-backup.tar | tar --list
+Restore UCP from Backup
+First, uninstall UCP on the UCP manager server.
+
+docker container run --rm -it \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  --name ucp \
+  docker/ucp:3.1.5 uninstall-ucp --interactive
+Restore UCP from the backup.
+
+docker container run --rm -i --name ucp \
+  -v /var/run/docker.sock:/var/run/docker.sock  \
+  docker/ucp:3.1.5 restore --passphrase "secretsecret" < /home/cloud_user/ucp-backup.tar
+Back up DTR
+On the DTR server, get the DTR replica ID.
+
+docker volume ls
+Look for a volume name that begins with dtr-registry-. The string of letters and numbers at the end of this volume name us your DTR replica ID.
+
+Back up the registry images.
+
+sudo tar -zvcf dtr-backup-images.tar \
+  $(dirname $(docker volume inspect --format '{{.Mountpoint}}' dtr-registry-<replica-id>))
+Back up DTR metadata.
+
+read -sp 'ucp password: ' UCP_PASSWORD; \
+docker run --log-driver none -i --rm \
+  --env UCP_PASSWORD=$UCP_PASSWORD \
+  docker/dtr:2.6.6 backup \
+  --ucp-url https://<UCP Manager Private IP> \
+  --ucp-insecure-tls \
+  --ucp-username admin \
+  --existing-replica-id <replica-id> > dtr-backup-metadata.tar
+Restore DTR Backup
+Stop the existing DTR replica.
+
+docker run -it --rm \
+  docker/dtr:2.6.6 destroy \
+  --ucp-insecure-tls \
+  --ucp-username admin \
+  --ucp-url https://<UCP Manager Private IP>
+Restore images.
+
+sudo tar -xzf dtr-backup-images.tar -C /var/lib/docker/volumes
+Restore DTR metadata.
+
+read -sp 'ucp password: ' UCP_PASSWORD; \
+docker run -i --rm \
+  --env UCP_PASSWORD=$UCP_PASSWORD \
+  docker/dtr:2.6.6 restore \
+  --dtr-use-default-storage \
+  --ucp-url https://<UCP Manager Private IP> \
+  --ucp-insecure-tls \
+  --ucp-username admin \
+  --ucp-node <hostname> \
+  --replica-id <replica-id> \
+  --dtr-external-url <dtr-external-url> < dtr-backup-metadata.tar

@@ -1,0 +1,17 @@
+When using Docker to manage containers, it is important to be able to keep the Docker engine up-to-date. 
+
+Relevant Documentation
+https://docs.docker.com/install/linux/docker-ce/ubuntu/#upgrade-docker-ce
+
+Lesson Reference
+Downgrade to a previous version:
+
+sudo systemctl stop docker
+sudo apt-get remove -y docker-ce docker-ce-cli
+sudo apt-get update
+sudo apt-get install -y docker-ce=5:18.09.4~3-0~ubuntu-bionic docker-ce-cli=5:18.09.4~3-0~ubuntu-bionic
+docker version
+Upgrade to a new version:
+
+sudo apt-get install -y docker-ce=5:18.09.5~3-0~ubuntu-bionic docker-ce-cli=5:18.09.5~3-0~ubuntu-bionic
+docker version

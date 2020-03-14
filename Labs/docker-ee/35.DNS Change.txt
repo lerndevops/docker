@@ -1,0 +1,21 @@
+Docker containers use a DNS server to locate external servers when using hostnames. In some scenarios, you may wish to customize which external DNS server is used by your containers. In this lesson, we will discuss how to customize your external DNS, both for the Docker daemon as a whole and for individual containers.
+
+Relevant Documentation
+https://docs.docker.com/v17.09/engine/userguide/networking/default_network/configure-dns/
+https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-dns-options
+Lesson Reference
+Edit the Docker daemon config file to set a custom DNS for the host.
+
+ sudo vi /etc/docker/daemon.json
+ {
+   "dns": ["8.8.8.8"]
+ }
+Restart Docker.
+
+ sudo systemctl restart docker
+Test your DNS by looking up an external domain.
+
+ docker run nicolaka/netshoot nslookup google.com
+Run a container with a custom DNS and test it by doing an nslookup.
+
+ docker run --dns 8.8.4.4 nicolaka/netshoot nslookup google.com
