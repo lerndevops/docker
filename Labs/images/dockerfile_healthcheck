@@ -25,3 +25,7 @@ The interval option specifies the number of seconds to initially wait before exe
 The timeout option specifies the number of seconds Docker awaits for your health check command to return an exit code before declaring it as failed (and your container as unhealthy).
 The start-period option specifies the number of seconds your container needs to bootstrap. During this period, health checks with an exit code greater than zero won’t mark the container as unhealthy; however, a status code of 0 will mark the container as healthy.
 The retries option specifies the number of consecutive health check failures required to declare the container as unhealthy.
+
+
+Docker Swarm behaviour
+A useful feature of health checks when running containers in Docker Swarm is that for as long as the container is in an unhealthy or (health: starting) status, routing is disabled and no requests reach the container at all.
