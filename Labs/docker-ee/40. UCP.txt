@@ -1,0 +1,51 @@
+Docker Universal Control Plane (UCP) provides a robust interface for managing your Docker applications in a cluster. In this lesson, we will introduce UCP and demonstrate the process of setting up a basic UCP cluster with one manager and two worker nodes.
+
+Relevant Documentation
+https://docs.docker.com/ee/ucp/admin/install/
+https://docs.docker.com/ee/ucp/
+Lesson Reference
+To complete this lesson, you will need three playground servers. All should have Docker EE installed.
+
+UCP Manager
+Ubuntu 18.04 Bionic Beaver LTS
+Size: Large
+UCP Worker with DTR
+Ubuntu 18.04 Bionic Beaver LTS
+Size: Medium
+UCP Worker
+Ubuntu 18.04 Bionic Beaver LTS
+Size: Small
+On the UCP Manager server, Pull the UCP image.
+
+docker image pull docker/ucp:3.1.5
+Set a temporary environment variable containing the private IP address of your UCP manager server.
+
+PRIVATE_IP=<your UCP manager private IP>
+Run the UCP installer.
+
+docker container run --rm -it --name ucp \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  docker/ucp:3.1.5 install \
+  --host-address $PRIVATE_IP \
+  --interactive
+When prompted, create some admin credentials.
+
+You will also be prompted for Additional Aliases. When this happens, just hit Enter to accept the default value.
+
+Once the installation is complete, access UCP in a web browser using the UCP manager's Public IP address: https://<your UCP manager public IP>.
+
+Log in to the UCP manager using the credentials you created earlier.
+
+You will be prompted to provide a license:
+
+Open another tab and go to https://hub.docker.com/my-content.
+Click Setup.
+Download the license using the License Key link.
+Go back to the UCP tab and click Upload License. Select the license file you just downloaded and upload it.
+In your browser, on the UCP dashboard, click Shared Resources, Nodes, then Add Node.
+
+Make sure the Node type is Linux and the Node role is Worker. Then, copy the docker swarm join command that appears on the page.
+
+Run the docker swarm join obtained from the UCP manager on both worker nodes.
+
+If you go to Shared Resources, then Nodes on the UCP dashboard in your browser, you should see both worker nodes appear in the list.
