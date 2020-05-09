@@ -1,0 +1,26 @@
+Docker Trusted Registry (DTR) is an enterprise-ready private registry which includes additional features that are not available with a free private registry. In this lesson, we will introduce DTR. We will also demonstrate how to set up a Docker Trusted Registry within your UCP cluster.
+
+Relevant Documentation
+https://docs.docker.com/ee/dtr/admin/install/
+https://docs.docker.com/ee/dtr/
+Lesson Reference
+In the Universal Control Plane interface, go to admin, Admin Settings, then Docker Trusted Registry.
+
+Under UCP Node, select the worker node where you want to install DTR.
+
+Check the checkbox labeled Disable TLS verification for UCP.
+
+Copy the command provided on the page, then use a text editor to change the --ucp-url to specify the Private IP of the UCP Manager server, not the public IP.
+
+Run the modified command on the worker node where you want to install DTR. The command should look like this:
+
+docker run -it --rm docker/dtr install \
+  --ucp-node 172.31.8.89 \
+  --ucp-username admin \
+  --ucp-url https://172.31.7.61 \
+  --ucp-insecure-tls
+When prompted for a password, enter your UCP admin password.
+
+Once the installation is complete, access DTR in your browser at https://<DTR server public IP>.
+
+Log in using your UCP admin credentials.
