@@ -2,7 +2,7 @@
 
 # replace the below sample URL with your's
 ## goto https://store.docker.com/my-content to find the url
-DOCKER_EE_URL="https://storebits.docker.com/ee/trial/sub-140bff8d-1fe8-494e-93c9-6d7e65c6ab8a"
+DOCKER_EE_URL="https://storebits.docker.com/ee/trial/sub-496dab4e-aba4-4cf0-84b3-a83e2d720189"
 DOCKER_EE_VERSION=19.03
 
 ## Install required packages
