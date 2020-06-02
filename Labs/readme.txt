@@ -1,4 +1,4 @@
-Docker Cheat Sheet:
+Docker Cheat Sheet commads:
 
 Docker Containers
 	docker search  # search the images in docker hub
