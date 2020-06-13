@@ -1,0 +1,1380 @@
+
+Exam Breakdown
+Installation and Configuration
+1.How should we give a user permission to interact with the Docker daemon on a machine without giving them unnecessary additional access?
+
+A.Add the user to the docker group.
+
+B.Give the user the ability to run docker commands with sudo.
+
+C.Have them log in as the docker user.
+
+D.Give the user the root user credentials so they can run docker commands as root.
+
+Correct Answer: A
+
+Why is this correct?
+Docker provides the docker group for the purpose of giving users permission to solely access Docker.
+
+2.Which of the following namespaces is not enabled by default?
+
+A.mnt
+
+B.uts
+
+C.pid
+
+D.user
+
+Correct Answer: D
+Why is this correct?
+Docker requires special configuration in order to utilize user namespaces.
+
+  
+3.
+What procedure should we follow to upgrade the Docker engine on an Ubuntu server?
+
+A
+Stop Docker, remove the packages, and then reinstall the packages with a newer version.
+
+B
+Stop Docker, then install the packages with the newer version.
+
+C
+Remove all containers, stop Docker, and then install the newer version.
+
+D
+Install newer versions of the docker-ce and docker-ce-cli packages.
+
+Your Answer: A
+Why is this   ?
+We don't need to stop Docker or remove the packages before upgrading.
+
+Correct Answer: D
+Why is this correct?
+We must install newer versions of the packages in order to upgrade Docker.
+
+4.
+Bob has set up a new Docker server. The overlay2 driver is the default for the server, but he wants to use devicemapper instead. Which of the following are ways to implement this change?
+
+A
+Set storage-driver to devicemapper in /etc/docker/daemon.json.
+
+B
+Add the --storage-driver flag to the dockerd call in Docker's unit file.
+
+C
+Reformat the storage disk.
+
+D
+Use a different Docker version.
+
+Correct Answer: A
+Why is this correct?
+We can set the storage driver in /etc/docker/daemon.json.
+
+  
+5.
+How would we go about backing up images in the Docker Trusted Registry (DTR)?
+
+A
+Create a backup of everything in the DTR image storage volume.
+
+B
+Run a docker pull on all of the images to transfer them to another host.
+
+C
+Execute a container using the dtr image with the backup-images command.
+
+D
+Back up everything in /var/lib/docker/volumes.
+
+Your Answer: C
+Why is this   ?
+This is not a method for backing up images in the DTR.
+
+Correct Answer: A
+Why is this correct?
+To back up images, back up the contents of the volume DTR used to store images.
+
+6.
+Amanda wants to execute a one-time job using a Docker container. However, occasionally, this job fails and needs to restart. Amanda doesn't want to restart it manually if it fails. Which command should she use to make sure that the container executes the one-time job successfully?
+
+A
+docker run --recover-failure cleanup-job
+
+B
+docker run --restart failure-only cleanup-job
+
+C
+docker run --restart unless-stopped cleanup-job
+
+D
+docker run --restart on-failure cleanup-job
+
+Correct Answer: D
+Why is this correct?
+This restart policy will only restart the container if it exits with a non-zero exit code.
+
+7.
+Which Docker edition would we choose for obtaining the latest Docker Engine updates?
+
+A
+Docker Developer Edition (DE)
+
+B
+Docker Community Edition (CE)
+
+C
+Either Docker CE or Docker EE
+
+D
+Docker Enterprise Edition (EE)
+
+Correct Answer: C
+Why is this correct?
+Docker CE and EE both get all the latest engine updates.
+
+8.
+Which of the following best describes the procedure for backing up the Universal Control Plane (UCP) metadata?
+
+A
+Run a container from the ucp image with the uninstall-ucp command.
+
+B
+Create an archive for all of the data under the /var/data/ucp directory.
+
+C
+Create an archive for all of the data under the /etc/docker/ucp directory.
+
+D
+Run a container from the ucp image with the backup command.
+
+Correct Answer: D
+Why is this correct?
+This is the basic procedure for backing up the UCP metadata.
+
+9.
+Nancy wants to run a container using an image called foo. She wants to publish the container's port 3001 to port 5050 on the host. Which of the following commands will accomplish this?
+
+A
+docker run -d -p 5050:3001 foo
+
+B
+docker run --port 5050:3001 foo
+
+C
+docker run -d -p 3001:5050 foo
+
+D
+docker run foo -p 5050:3001
+
+Correct Answer: A
+Why is this correct?
+This command will run the container with port 3001 published to host and listen on 5050.
+
+  
+10.
+Sara wants to run a container using the busybox image, and she wants to pass a custom command to the container: echo Docker is great!. Which of the following commands will accomplish this?
+
+A
+docker run busybox ["echo", "Docker is great!"]
+
+B
+docker run busybox echo Docker is great!
+
+C
+docker run busybox -c echo Docker is great!
+
+D
+docker run busybox -cmd echo Docker is great!
+
+Your Answer: C
+Why is this   ?
+The -c flag is not necessary for running the command.
+
+Correct Answer: B
+Why is this correct?
+This command will successfully execute the echo command in the container and print the message to the screen.
+
+Image Creation, Management, and Registry
+11.
+Which of the following commands will build an image from a Dockerfile located in the current directory and tag it as my-custom-image:1?
+
+A
+docker build -t my-custom-image:1 .
+
+B
+docker build .
+
+C
+docker build -tag my-custom-image:1 .
+
+D
+docker build -tag my-custom-image:1
+
+Correct Answer: A
+Why is this correct?
+This command will build the image and tag it appropriately.
+
+12.
+What does the CMD directive do?
+
+A
+It sets the default command for the image that runs if no other command is specified.
+
+B
+It runs a command on the host when the container starts.
+
+C
+It runs a command within the image and commits it to the result.
+
+D
+It executes a command during the build process.
+
+Correct Answer: A
+Why is this correct?
+The CMD directive sets the default command.
+
+13.
+Which of the following statements truly applies to the ENV directive?
+
+A
+It sets environment variables that are only visible at the container runtime.
+
+B
+It sets environment variables that are made available in subsequent build steps and to containers at the runtime.
+
+C
+It sets an environment variable on the host while the container is running.
+
+D
+It sets environment variables that are only visible during later build steps.
+
+Correct Answer: B
+Why is this correct?
+The ENV directive sets environment variables, and they're visible during subsequent build steps and at the container runtime.
+
+14.
+How can we flatten an existing multi-layered image into a single layer?
+
+A
+We can run a container from the image, export it, and then import it as a new image.
+
+B
+We can use a multi-stage build.
+
+C
+We would not include any RUN directives in our Dockerfile.
+
+D
+We can use the --flatten flag with the docker build command.
+
+Correct Answer: A
+Why is this correct?
+This procedure will flatten an image into a single layer.
+
+15.
+Which Dockerfile directive would set up the base image that can serve as our starting point for establishing a new image?
+
+A
+START
+
+B
+FROM
+
+C
+BASE
+
+D
+ARG
+
+Correct Answer: B
+Why is this correct?
+The FROM directive sets the base image.
+
+16.
+What command would we use to locate the layered file system data for an image on a machine?
+
+A
+docker layer inspect
+
+B
+docker pull history
+
+C
+docker image inspect
+
+D
+docker image layers
+
+Correct Answer: C
+Why is this correct?
+The docker image inspect command will return the image metadata, including the location of the layered file system data.
+
+17.
+Which of the following statements does not apply to the WORKDIR directive?
+
+A
+It affects only the build and does not impact containers that run from the image.
+
+B
+It sets the working directory for the container at runtime.
+
+C
+It sets the working directory for subsequent build steps.
+
+D
+It can use both absolute and relative paths.
+
+Correct Answer: A
+Why is this correct?
+The WORKDIR directive affects the containers by setting the working directory at the container runtime.
+
+18.
+How would we go about keeping track of changes made to an image in source control (i.e., git)?
+
+A
+We would store the Dockerfile in source control.
+
+B
+We would use Docker Trusted Registry (DTR) to handle this.
+
+C
+Maintain tags for each new version within the Docker registry.
+
+D
+We would push the image layers to a source control repository.
+
+Correct Answer: A
+Why is this correct?
+We can keep the Dockerfile in source control to track any changes made to the Dockerfile.
+
+19.
+What does the FROM directive do?
+
+A
+It sets a base image that can be used as a platform to begin builds.
+
+B
+It pulls a file from an external source into the image.
+
+C
+It sets the working directory of containers ran using the image.
+
+D
+It indicates the build location of where the image is.
+
+Correct Answer: A
+Why is this correct?
+The FROM directive sets the base image.
+
+  
+20.
+Dave needs Docker to use a custom stop signal for halting his software. How can he build an image that will instruct Docker on which stop signal to use?
+
+A
+Dave should use the STOP directive.
+
+B
+Dave should use the STOPSIGNAL directive.
+
+C
+Dave should use the docker stop command.
+
+D
+Dave should locate the process and kill it manually.
+
+Your Answer: C
+Why is this   ?
+The docket stop command ceases containers but does not help determine which stop signal he should use.
+
+Correct Answer: B
+Why is this correct?
+The STOPSIGNAL directive instructs Docker on which stop signal to use for halting a container process.
+
+Orchestration
+21.
+What command will help us delete a service called my-service along with all of its tasks?
+
+A
+docker service rm -f my-service
+
+B
+docker service rm --all my-service
+
+C
+docker service rm my-service --cascade
+
+D
+docker service rm my-service
+
+Correct Answer: D
+Why is this correct?
+This command will delete the service and all of its tasks.
+
+22.
+Which of the following commands can we use to view detailed metadata about a container? (Choose two)
+
+A
+docker metadata
+
+B
+docker container inspect
+
+C
+docker query
+
+D
+docker inspect
+
+Correct Answer: B
+Why is this correct?
+This command will allow us to find metadata about any container.
+
+Correct Answer: D
+Why is this correct?
+This command will allow us to query metadata about any Docker object.
+
+23.
+Sally wants to prevent Docker Swarm encryption keys from being stored insecurely on her swarm managers. How can she tackle enforcing a lock on the swarm cluster?
+
+A
+Sally cannot do this because Docker does not offer this functionality.
+
+B
+Sally can use the --autolock=true flag with the docker swarm update command.
+
+C
+Sally can locate the critical files after the installation and delete them.
+
+D
+The autolock feature must be turned on when the cluster is initialized and cannot be enabled after the fact.
+
+Correct Answer: B
+Why is this correct?
+This command will turn on --autolock, ensuring that managers will be automatically locked whenever the Docker daemon restarts.
+
+  
+24.
+Which of the following commands will evenly spread out tasks based upon the values of a node label?
+
+A
+docker service create --placement-pref spread=node.labels.availability_zone nginx
+
+B
+docker service create --constraint spread=node.labels.availability_zone nginx
+
+C
+docker service create --placement-pref even-spread=node.labels.availability_zone nginx
+
+D
+docker service create --placement-pref spread nginx
+
+Your Answer: C
+Why is this   ?
+The even-spread flag is not valid for the task at hand.
+
+Correct Answer: A
+Why is this correct?
+This command will evenly spread out tasks based upon the values of the availability_zone label.
+
+  
+25.
+Kelly has a Docker swarm cluster with --autolock enabled. One of her manager nodes has become locked, and she has lost the unlock key. Fortunately, there are still some swarm nodes that are not locked. How can she obtain the unlock key from one of the unlocked nodes?
+
+A
+Kelly can look in the file located at /etc/docker/swarm/unlock.key.
+
+B
+Kelly can use the docker swarm unlock command.
+
+C
+Kelly can use the docker swarm unlock-key command.
+
+D
+Kelly can use the docker swarm key print command.
+
+Your Answer: B
+Why is this   ?
+This command cannot retrieve an unlock key.
+
+Correct Answer: C
+Why is this correct?
+This command will retrieve the unlock key from a manager node that is currently not locked.
+
+26.
+Which of the following commands will allow us to add a label to a Docker Swarm node?
+
+A
+docker node tag <label> <node name>
+
+B
+docker label add <label> <node name>
+
+C
+docker node update --labels <label> <node name>
+
+D
+docker node update --label-add <label> <node name>
+
+Correct Answer: D
+Why is this correct?
+This command will add a label to the node.
+
+27.
+Eric has an application that consists of multiple different containers that interact with one another. What should he use to manage this application in a Docker Swarm?
+
+A
+Eric should use a task.
+
+B
+Eric should use docker-compose.
+
+C
+Eric should use a stack.
+
+D
+Eric should use a service with multiple tasks.
+
+Correct Answer: C
+Why is this correct?
+Docker stacks are designed for managing multi-container applications in a swarm.
+
+28.
+How would we back up the metadata for Docker Swarm?
+
+A
+We can run the swarm image with the backup command.
+
+B
+We can back up the contents of /usr/local/swarm.
+
+C
+While the Docker daemon stops, we can back up the contents of /var/lib/docker/swarm on a Swarm manager.
+
+D
+We can back up the contents of /etc/docker/swarm.
+
+Correct Answer: C
+Why is this correct?
+We can back up Docker Swarm metadata by backing up the contents of this directory.
+
+29.
+We have seven Swarm manager nodes total. How should we distribute them across just three availability zones?
+
+A
+5-1-1
+
+B
+4-2-1
+
+C
+3-2-2
+
+D
+6-1-0
+
+Correct Answer: C
+Why is this correct?
+This setup enables us to lose any of the availability zones and still maintain the quorum.
+
+  
+30.
+How would we rotate a docker swarm unlock-key and ensure that all nodes receive the new key?
+
+A
+We would run the docker swarm unlock-key --rotate command on one manager node.
+
+B
+We would generate a new key and save it in a file located at /etc/docker/swarm/unlock.key.
+
+C
+We would run the docker swarm unlock-key --rotate command on all manager nodes.
+
+D
+We can use the docker swarm unlock command.
+
+Your Answer: C
+Why is this   ?
+This command only needs to be run on one node, and the key's rotation will be propagated automatically across all nodes in the cluster.
+
+Correct Answer: A
+Why is this correct?
+This command will automatically rotate the key and handle all orchestration between nodes.
+
+Storage and Volumes
+31.
+How would we create a volume called new-volume without running a container?
+
+A
+We would run docker volume create new-volume.
+
+B
+We would use docker run -v new-volume:/tmp nginx.
+
+C
+We would run docker run --rm -v new-volume:/tmp nginx.
+
+D
+We would run docker create volume new-volume.
+
+Correct Answer: A
+Why is this correct?
+This command will create a new volume without running a container.
+
+32.
+Which of the following configurations would be best for enabling direct-lvm mode with devicemapper?
+
+A
+Set dm.directlvm_device in /etc/docker/daemon.json.
+
+B
+Set dm.mode=direct-lvm in /etc/docker/daemon.json.
+
+C
+Set dm.loop-lvm=false in /etc/docker/daemon.json.
+
+D
+Set dm.direct-lvm=true in /etc/docker/daemon.json.
+
+Correct Answer: A
+Why is this correct?
+We can enable direct-lvm by setting this value in daemon.json to a block storage device.
+
+33.
+Anastasia has created a container with a volume called shared-data. She wants to create a new container that can access the same data as the first container, but she wants this new container only to be able to read the data, not modify it. How can she accomplish this?
+
+A
+Anastasia can use docker run --name new-container -v shared-data:/tmp:ro nginx.
+
+B
+This task is not possible for Anastasia to complete because we cannot mount the same volume to two containers.
+
+C
+Anastasia can use docker run --name new-container -v shared-data:/tmp nginx.
+
+D
+Anastasia can create a bind mount for the new container that points to the physical location of the shared volume on the host.
+
+Correct Answer: A
+Why is this correct?
+This command will mount the shared volume to the new container in read-only mode.
+
+34.
+What flag should we use to specify a custom volume driver when creating a volume alongside a service that has docker service create?
+
+A
+--mount volume-driver=<driver>
+
+B
+--driver <driver>
+
+C
+--volume-driver <driver>
+
+D
+--volumedriver <driver>
+
+Correct Answer: A
+Why is this correct?
+This will create the volume with the specified driver.
+
+  
+35.
+Which storage driver is the default for current versions of CentOS/RHEL and Ubuntu?
+
+A
+aufs
+
+B
+direct-lvm
+
+C
+devicemapper
+
+D
+overlay2
+
+Your Answer: A
+Why is this   ?
+The aufs storage driver is the default for older versions of Ubuntu.
+
+Correct Answer: D
+Why is this correct?
+The overlay2 storage driver is the default for current versions of CentOS/RHEL and Ubuntu.
+
+  
+36.
+Which of the following commands may result in the creation of a new named volume?
+
+A
+docker run -v /my-vol:/tmp:create nginx
+
+B
+docker run -v /my-vol:/tmp nginx
+
+C
+docker run --mount source=/my-vol,destination=/tmp nginx
+
+D
+docker run -v my-vol:/tmp nginx
+
+Your Answer: B
+Why is this   ?
+This command will create a bind mount and will never create a volume.
+
+Correct Answer: D
+Why is this correct?
+This command will create a new volume called my-vol if one does not already exist under that name.
+
+  
+37.
+Which of the following is true of filesystem storage models? (Choose two)
+
+A
+They are used by overlay2 and aufs.
+
+B
+They use an external, object-based store.
+
+C
+They are efficient with write-heavy workloads.
+
+D
+They store data in regular files on the host machine.
+
+Your Answer: B
+Why is this   ?
+This is true of object storage, not filesystem storage.
+
+Correct Answer: A
+Why is this correct?
+The overlay2 and aufs storage drivers both use filesystem storage models.
+
+Correct Answer: D
+Why is this correct?
+Filesystem storage models simulate a file system and store the data in regular files onto the host machine.
+
+38.
+We have a Docker host that is running low on storage. What command could help us identify how the host is using storage?
+
+A
+docker system df
+
+B
+docker container ls
+
+C
+docker image inspect
+
+D
+docker image prune
+
+Correct Answer: A
+Why is this correct?
+This command will give us a summary of how Docker is using our storage.
+
+39.
+Which of the following commands would we use to locate the data for a volume on the host?
+
+A
+docker volume locate <volume>
+
+B
+docker volume navigate <volume>
+
+C
+docker volume inspect <volume>
+
+D
+docker volume logs <volume>
+
+Correct Answer: C
+Why is this correct?
+This command will provide the metadata for the volume, including the actual location of the data.
+
+40.
+Which of the following commands can we use to locate the actual files that store a container's internal data?
+
+A
+docker container inspect <container>
+
+B
+docker volume ls
+
+C
+docker container volume ls
+
+D
+docker image inspect <image>
+
+Correct Answer: A
+Why is this correct?
+This command will return the container metadata, including the location of its data on the host.
+
+Networking
+41.
+Which of the following commands will create a new bridge network?
+
+A
+docker network create --network-driver bridge my-network
+
+B
+docker network create my-network
+
+C
+docker network create --driver overlay my-network
+
+D
+docker network create --network bridge my-network
+
+Correct Answer: B
+Why is this correct?
+Since the bridge is the default, a new bridge network will generate even when --driver is not specified.
+
+  
+42.
+When creating an overlay network, what flag can we use to allow containers to attach to the network after it is created?
+
+A
+--attach=true
+
+B
+--open true
+
+C
+--attachable
+
+D
+--network-driver attachable
+
+Your Answer: A
+Why is this   ?
+This flag will not work for the task at hand.
+
+Correct Answer: C
+Why is this correct?
+After the creation of the overlay network, the --attachable flag will allow containers to attach to the network.
+
+43.
+Which of the following is true of a service that has a port published in ingress mode?
+
+A
+The service will only listen on worker nodes that are running the service's tasks and manager nodes.
+
+B
+The service will only listen on nodes that are running tasks associated with the service.
+
+C
+The service will listen on all nodes on the cluster.
+
+D
+The service will only listen on a manager.
+
+Correct Answer: C
+Why is this correct?
+With ingress mode services listen on all nodes in the cluster.
+
+  
+44.
+Which of the following commands will publish a service's port, but only on nodes that are running a task for that service?
+
+A
+docker service create -p mode=ingress,published=8082,target=80 nginx
+
+B
+docker service create -p mode=host,published=8082,target=80 nginx
+
+C
+docker service create -p 8080:80 --mode host nginx
+
+D
+docker service create -p 8080:80 nginx
+
+Your Answer: D
+Why is this   ?
+This command uses the default of ingress mode, which will not meet the provided requirements.
+
+Correct Answer: B
+Why is this correct?
+Host publishing mode only publishes ports on nodes that are running a task for the service.
+
+45.
+Which of the following commands would we use to view a container's logs?
+
+A
+docker logs <container>
+
+B
+docker service logs <service>
+
+C
+docker container get-log
+
+D
+sudo journalctl -u docker
+
+Correct Answer: A
+Why is this correct?
+This command will return the container's logs.
+
+46.
+Which of the following commands will attach the tasks of a new service to an existing overlay network called my-overlay?
+
+A
+docker service create --network-driver overlay nginx
+
+B
+docker service create --n my-overlay nginx
+
+C
+docker service create --network my-overlay nginx
+
+D
+docker service create --attach my-overlay nginx
+
+Correct Answer: C
+Why is this correct?
+This command will attach the service's tasks to a specified network.
+
+47.
+Which of the following is a valid method that we can use for setting the default DNS server for all containers on a host?
+
+A
+We can edit the /etc/hosts file on the host.
+
+B
+We can use docker config set dns.
+
+C
+We can use the --dns flag with docker run.
+
+D
+We can set "dns" in /etc/docker/daemon.json.
+
+Correct Answer: D
+Why is this correct?
+This method will set the default DNS for all containers on the host.
+
+48.
+When creating a container, how would we specify that the container should be attached to an existing network called my-network?
+
+A
+We can use docker run --network my-network nginx.
+
+B
+We can use docker run --network-alias web nginx.
+
+C
+We can use docker run -n my-network nginx.
+
+D
+We can use docker run --attach my-network nginx.
+
+Correct Answer: A
+Why is this correct?
+This command will attach the container to an existing network called my-network.
+
+  
+49.
+Which of the following tasks can we perform to set a custom DNS server for a container?
+
+A
+We can use the --nameserver flag with docker run.
+
+B
+We can set "dns" in /etc/docker/daemon.json.
+
+C
+We can use the --dns flag with docker run.
+
+D
+We can use the --dns-override flag with docker run.
+
+Your Answer: B
+Why is this   ?
+This would set the default DNS server for the entire host, not just one container.
+
+Correct Answer: C
+Why is this correct?
+This method would allow us to set a custom DNS server for the container.
+
+  
+50.
+Which of the following statements about the overlay network driver is accurate?
+
+A
+The network is set up on every node in the cluster as soon as the network faces creation.
+
+B
+Networking components are created on nodes dynamically when tasks get scheduled on the node.
+
+C
+The overlay driver only allows communication between containers running on the same host.
+
+D
+The network must be set up manually on each node.
+
+Your Answer: A
+Why is this   ?
+The network is only set up on nodes that are running tasks which require the network's presence.
+
+Correct Answer: B
+Why is this correct?
+The overlay network driver dynamically creates networking components on the node when a relevant task gets scheduled on that node.
+
+Security
+  
+51.
+What Linux feature does Docker use to allow containers to listen on ports lower than 1024 without running as root on the host?
+
+A
+Namespaces
+
+B
+Control Groups
+
+C
+Linux jails
+
+D
+Capabilities
+
+Your Answer: A
+Why is this   ?
+Namespaces are not used to provide this functionality.
+
+Correct Answer: D
+Why is this correct?
+Capabilities are used by Docker to provide granular permissions to container processes, such as listening on low ports without the need for root access.
+
+  
+52.
+Which of the following statements about Docker Content Trust (DCT) is accurate?
+
+A
+When Docker Content Trust is enabled, unsigned images will not be allowed to run on the system.
+
+B
+Docker Content Trust requires a Docker Enterprise Edition (EE) license.
+
+C
+We need to implement a trusted Public Key Infrastructure (PKI) to sign images.
+
+D
+Only images stored on Docker Hub can be signed.
+
+Your Answer: D
+Why is this   ?
+Signed images are capable of being stored in any registry.
+
+Correct Answer: A
+Why is this correct?
+Docker Content Trust enforces the rule that only signed images are run or pulled.
+
+  
+53.
+What is an easy way to configure a client to communicate with Universal Control Plane (UCP) using client certificates?
+
+A
+docker ucp login
+
+B
+We can log into UCP via a browser.
+
+C
+We can download and use a client bundle.
+
+D
+We can execute the docker login command.
+
+Your Answer: B
+Why is this   ?
+Accessing UCP via a browser would not configure a docker client to authenticate.
+
+Correct Answer: C
+Why is this correct?
+Client bundles provide client certificates for authenticating with UCP.
+
+54.
+Tracy has a Docker Trusted Registry (DTR), and her development team has been mistakenly overwriting images in a repository by pushing a different image with an existing tag. How can she prevent this from happening?
+
+A
+Tracy can remove the team's access to the registry.
+
+B
+Tracy can make the repository private.
+
+C
+Tracy can back up the registry.
+
+D
+Tracy can mark the repository as immutable.
+
+Correct Answer: D
+Why is this correct?
+Marking the repository as immutable will prevent her team from overwriting existing tags.
+
+  
+55.
+Which of the following is not a namespace used by Docker?
+
+A
+mem
+
+B
+pid
+
+C
+uts
+
+D
+net
+
+Your Answer: C
+Why is this   ?
+Docker uses this namespace.
+
+Correct Answer: A
+Why is this correct?
+This is not a namespace used by Docker.
+
+
+
+
+Que). In docker file below are the syntax
+WORKDIR /a
+WORKDIR b
+WORKDIR c
+What is the value of CMD [/bin/$PWD]
+ANS: /a/b/c
+
+
+QUE) Which of the following is required to install Docker EE from a package repository?
+A. Repository URL obtained from Docker Store
+B. License key obtained from Docker Store
+C. Repository URL obtained from Docker Hub
+D. License key obtained from Docker Hub
+ANS).Repository URL obtained from Docker Store
+
+QUE). What is the difference between the ADD and COPY dockerfile instructions? (choosen 2)
+A. ADD supports compression format handling while COPY does not.
+B. COPY supports regular expression handling while ADD does not.
+C. COPY supports compression format handling while ADD does not.
+D. ADD support remote URL handling while COPY does not.
+E. ADD supports regular expression handling while COPY does not.
+ANS) A or D both
+
+
+QUE). Which of these swarm manager configurations will cause the cluster to be in a lost quorum state?
+A. 4 managers of which 2 are healthy
+B. 1 manager of which 1 is healthy
+C. 3 managers of which 2 are healthy
+D. 5 managers of which 3 are healthy
+ANS). A
+
+QUE). What service mode is used to deploy a single task of a service to each node?
+A. replicated
+B. spread
+C. universal
+D. distributed
+E. global
+ANS). E (global)
+
+
+
+QUE). You have deployed a service to swarm. Which command uses the Docker CLI to set the number of tasks of the services to 5? (choose 2)(PDF)
+A. 'docker service update --replicas=5 <service-id>'
+B. 'docker replica update <service-id>=5'
+C. 'docker update service <service-id>=5'
+D. 'docker service replicas <service-id>=5'
+E. 'docker service scale <service-id> = 5''
+ANS). A or E (Both)
+
+
+QUE). What is the recommended way to configure the daemon flags and environment variables for your Docker daemon in a platform independent way?
+A. Set the configuration options using the ENV variable
+B. Set the configuration options in '/etc/docker/daemon.json'
+C. Set the configuration DOCKER_OPTS in '/etc/default/docker'
+D. Using 'docker config' to set the configuration options.
+ANS). B
+
+QUE). You have just executed 'docker swarm leave' on a node. What command can be run on the same node to confirm it has left the cluster?(PDF)
+A. docker node ls
+B. docker system info
+C. docker system status
+D. docker system status
+ANS). B
+
+
+QUE) When seven managers are in a swarm cluster how would they be distributed across three datacenters or availability zones? (PDF)
+A. 5-1-1
+B. 3-2-2
+C. 3-3-1
+D. 4-2-1
+ANS)> B
+
+
+QUE) From a DevOps process standpoint, it is best practice to keep changes to an application in version control. Which of the following will allow changes to a docker Image to be stored in a version control system?
+A. docker commit
+B. docker save
+C. A docker-compose.yml file
+D. A dockerfile
+ANS) A
+
+QUE). An application image runs in multiple environments, and each environment uses different certificates and ports, what is the best practice to deploy the containers?
+A. Create a Dockerfile for each environment, specifying ports and ENV variables for certificates.
+B. Create a Dockerfile for each environment, specifying ports and Docker secrets for certificates.
+C. Create images that contain the specific configuration for every environment.
+D. Create a config file for each environment
+ANS). D
+
+
+QUE. How do you configure Docker engine to use a registry that is not configured with TLS certificates from a trusted CA?
+A. Set IGNORE_TLS in the 'daemon.json' configuration file.
+B. Set and export the IGNORE_TLS environment variable on the command line
+C. Set INSECURE_REGISTRY in the '/etc/docker/default' configuration file
+D. Pass the '--insecure.-registry' flag to the daemon at run time
+ANS: D
+
+
+QUE.If installing Docker using devicemapper for storage with the Intent to run production workloads, how should devicemapper be configured
+A. direct-lvm
+B. loop-lvm
+C. overlay-lvm
+D. aufs-lvm
+ANS). A
+
+
+QUE. Which of the following commands is used to display system-wide Docker configuration on a host?
+A. docker info
+B. docker status
+C. docker inspect
+D. docker system
+ANS). A
+
+QUE). What is used by the kernel to Isolate resources when running Docker containers?
+A. Namespaces
+B. Overlay networks
+C. Volumes
+D. Control groups (also know as cgroups)
+ANS: A
+
+QUE. Which command interactively monitors all container activity in the Docker engine?
+A. docker system logs
+B. docker system events
+C. docker container events
+D. docker container logs
+ANS: B
+
+QUE). Which of the following modes can be used for service discovery of a Docker swarm service (Pick 2 correct answers)
+A. Virtual IP (VIP) with --endpoint-mode vip
+B. Overlay with --endpoint-mode overlay
+C. DNS Round-Robin with --endpoint-mode dnsrr
+D. Ingress with --endpoint-mode ingress
+E. Network Address Translation(NAT) with --endpoint-mode nat
+ANS: A or C both
+
+QUE. Which of the following is true about overlay networks?
+A. Overlay networks are created only on the manager node that you created the overlay networking on
+B. Overlay networks are created on all cluster nodes when you create the overlay network.
+C. Overlay networks are first created on the manager nodes. Then they are created on the worker nodes once a task is scheduled on the specific worker node.
+D. Overlay networks are only created on the manager nodes.
+ANS).C
+
+QUE) Which set of commands can identify the publishd port(s) for a container? (Choose 1.)
+A. 'docker port inspect', 'docker container inspect'
+B. 'docker container inspect', docker port'
+C. 'docker info','docker network inspect'
+D. 'docker network inspect','docker port'
+ANS) B
+
+QUE). What behavior is expected when a service is created with the following command: 'docker service create --publish 8080:80 nginx'
+A. All nodes in the cluster will listen on port 8080 and forward to port 80 in the container.
+B. Only a single node in the cluster will listen on port 8080 and forward to port 80 in the container.
+C. All nodes in the cluster will listen on port 80 and forward to port 8080 in the container.
+D. Only a single node in the cluster will listen on port 80 and forward to port 8080 in the container
+ANS) A
+
+QUE). Which of the following commands will create a swarm service which only listens on port 53 using the UDP protocol?
+A. docker service create --name dns-cache -p 53:53/udp dns-cache
+B. docker service create --name dns-cache -p 53:53 --service udp dns-cache
+C. docker service create --name dns-cache -p 53:53 ..constraint networking.protocol.udp=true dns-cache
+D. docker service create --name dns-cache -p 53:53 --udp dns-cache
+ANS: A
+
+
+15. You have created a Docker bridge network on a host with three containers attached, how do you make this containers accessible outside of the host?
+A. Use network attach to access the containers on the bridge network
+B. Use either EXPOSE or --publish to access the containers on the bridge network
+C. Use network connect to access the containers on the bridge network
+D. Use --link to access the containers on the bridge network
+ANS):-C
+
+QUE. When using the Docker client to push an image to a registry, what environment variable is used to instruct the client to perform signing of the image?
+A. DOCKER_CONTENT_TRUST=1
+B. DOCKER_IMAGE_SIGN=1
+C. DOCKER_PUSH_SIGN=1
+D. NOTARY_ENABLE=1
+ANS). A
+
+QUE. What is the purpose of Docker Content Trust?
+A. Signing and verification of image tags
+B. Enabling mutual TLS between the Docker client and server
+C. Docker registry TLS verification and encryption
+D. Indicating an image on Docker Hub is an official image
+ANS: A
+
+
+QUE. 13. What is the purpose of a client bundle in the Universal Control Plane?
+A. Authenticate a user using client certificates to the Universal Control Plane
+B. Provide a new user instructions for how to login to the Universal Control Plane
+C. Provide a user with a Docker client binary compatible with the Universal Control Plane
+D. Group multiple users in a team in the Universal Control Plane
+ANS). A
+
+QUE. What is the purpose of Docker Content Trust?
+A. Signing and verification of image tags
+B. Enabling mutual TLS between the Docker client and server
+C. Docker registry TLS verification and encryption
+D. Indicating an image on Docker Hub is an official image
+ANS). A
+
+QUE. Which of the following is supported by control groups?
+A. Manage certificates
+B. Collect net
+C. Limit CPU usage within a container
+D. Isolate processes in a container
+ANS: C
+
+QUE. Which of the following namespaces is disabled by default and must be enabled at Docker engine runtime in order to be used?
+A. user
+B. pid
+C. net
+D. mnt
+ANS: A
+
+
+QUE. Which of the following statements is true about secrets?
+A. Secrets can be created from any node in the cluster.
+B. Secrets can be modified after they are created.
+C. Secret are stored unencrypted on manager nodes.
+D. Secrets can be created using standard input (STDIN) and a file
+ANS: D
+
+
+QUE. 7. Which of the following are types of namespaces used by Docker to provide isolation? (Choose 2.)
+A. Host
+B. Network
+C. Process ID
+D. Authentication
+E. Storage
+ANS: B or C Both
+
+QUE. A server is running low on disk space. What command can be used to check the disk usage of images, containers, and volumes for Docker engine?
+A. 'docker system df'
+B. 'docker system prune'
+C. 'docker system free'
+D. 'docker system ps'
+ANS: A
