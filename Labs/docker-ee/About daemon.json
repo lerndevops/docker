@@ -1,3 +1,6 @@
+https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-configuration-file
+
+
 The default location of the configuration file on Linux is /etc/docker/daemon.json. The --config-file flag can be used to specify a non-default location.
 Allowed configuration options on Linux:
 {
