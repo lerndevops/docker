@@ -1,6 +1,6 @@
 FROM ubuntu:bionic
 
-ENV NGINX_VERSION 1.14.0-0ubuntu1.2
+ENV NGINX_VERSION 1.10.3
 ENV trainer Ravi
 
 RUN apt-get update && apt-get install -y curl
