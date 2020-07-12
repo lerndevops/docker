@@ -10,7 +10,7 @@ Size - Micro
 Generate a certificate authority and server certificates for your Docker server. Make sure you replace <server private IP> with the actual private IP of your server. The structure of this should resemble the following:
 
 openssl genrsa -aes256 -out ca-key.pem 4096
-openssl req -new -x509 -days 365 -key ca-key.pem -sha256 -out ca.pem -subj "/C=US/ST=Texas/L=Keller/O=Linux Academy/OU=Content/CN=$HOSTNAME"
+openssl req -new -x509 -days 365 -key ca-key.pem -sha256 -out ca.pem -subj "/C=US/ST=Texas/L=Keller/O=RAVI IT/OU=Content/CN=$HOSTNAME"
 openssl genrsa -out server-key.pem 4096
 openssl req -subj "/CN=$HOSTNAME" -sha256 -new -key server-key.pem -out server.csr
 echo subjectAltName = DNS:$HOSTNAME,IP:<server private IP>,IP:127.0.0.1 >> extfile.cnf
