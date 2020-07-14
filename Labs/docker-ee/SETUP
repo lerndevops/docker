@@ -1,0 +1,68 @@
+Got to https://www.mirantis.com/software/docker/download/
+Register to download enterprise 
+
+Step1:
+======
+
+Take minimum 3 servers.
+1. sample server for download launchpad 
+2. Docker Manager (UCP). 8G RAM and 10G disk
+3. Docker Worker (for DTR) 4G RAM
+
+
+Step2:
+======
+ Set-up a commond user and configure SSH connecion using ssh-keygen and ssh-copy-id.
+ 
+Step3:
+======
+
+On sample server :
+1. sudo wget https://github.com/Mirantis/launchpad/releases/latest/download/launchpad-linux-x64
+2. mv launchpad-linux-x64 launchpad
+3. mv launchpad /usr/bin
+4. chmod 777 /usr/bin/launchpad
+
+Step 4:
+======
+
+1. be the user you created,configured the key with
+2. Configure a new file with name "cluster.yml" with below content. (The full set of options is here : https://github.com/Mirantis/launchpad/blob/master/docs/configuration-file.md) 
+
+apiVersion: launchpad.mirantis.com/v1beta2
+kind: UCP
+metadata:
+  name: ucp-kube
+spec:
+  ucp:
+    installFlags:
+    - --admin-username=admin
+    - --admin-password=passw0rd!
+    - --default-node-orchestrator=kubernetes
+  hosts:
+  - address: 35.192.187.40 # IP address of manager node
+    role: manager
+    ssh:
+      keyPath: /home/devops/.ssh/id_rsa # private key generated
+      user: devops # the user you create
+    privateInterface: ens4 # ip a command gives this .. normally eth0. varies with envs
+
+  - address: 34.70.200.211 # IP address of workder
+    role: worker
+    ssh:
+      keyPath: /home/devops/.ssh/id_rsa
+      user: devops
+    privateInterface: ens4
+    
+    
+Step3:
+======
+launchpad version # it returns the version 
+launchpad register # just give the values as it asked
+launchpad apply # this takes time and sets up Docker UCP.
+
+
+
+
+
+
