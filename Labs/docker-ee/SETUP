@@ -12,7 +12,7 @@ Take minimum 3 servers.
 
 Step2:
 ======
- Set-up a commond user and configure SSH connecion using ssh-keygen and ssh-copy-id.
+ Set-up a common user and configure SSH connecion using ssh-keygen and ssh-copy-id.
  
 Step3:
 ======
@@ -47,7 +47,7 @@ spec:
       user: devops # the user you create
     privateInterface: ens4 # ip a command gives this .. normally eth0. varies with envs
 
-  - address: 34.70.200.211 # IP address of workder
+  - address: 34.70.200.211 # IP address of worker
     role: worker
     ssh:
       keyPath: /home/devops/.ssh/id_rsa
