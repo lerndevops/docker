@@ -1,4 +1,4 @@
-Docker Enterprise Edition components such as Universal Control Plane and Docker Trusted Registry require sufficient resources in order to perform well in a production scenario. In this lesson, we will briefly discuss the published sizing requirements for these components, which you may need to be aware for the Docker Certified Associate exam.
+Docker Enterprise Edition components such as Universal Control Plane and Docker Trusted Registry require sufficient resources in order to perform well in a production scenario. 
 
 Relevant Documentation
 https://docs.docker.com/ee/ucp/admin/install/system-requirements/
