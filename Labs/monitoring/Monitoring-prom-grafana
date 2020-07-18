@@ -1,0 +1,97 @@
+Step1:   (Use Docker Swarm)
+=====
+
+Configure Docker
+To configure the Docker daemon as a Prometheus target, you need to specify the metrics-address. The best way to do this is via the daemon.json, which is located at one of the following locations by default. If the file does not exist, create it.
+
+Linux: /etc/docker/daemon.json
+Windows Server: C:\ProgramData\docker\config\daemon.json
+Docker Desktop for Mac / Docker Desktop for Windows: Click the Docker icon in the toolbar, select Preferences, then select Daemon. Click Advanced.
+If the file is currently empty, paste the following:
+
+{
+  "metrics-addr" : "127.0.0.1:9323",  # use privateIP here incase of cloud
+  "experimental" : true
+}
+
+Restart Docker
+
+Step2:
+======
+
+
+Copy the following configuration files and save it to /tmp/prometheus.yml
+
+# my global config
+global:
+  scrape_interval:     15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
+  evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
+  # scrape_timeout is set to the global default (10s).
+
+  # Attach these labels to any time series or alerts when communicating with
+  # external systems (federation, remote storage, Alertmanager).
+  external_labels:
+      monitor: 'codelab-monitor'
+
+# Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
+rule_files:
+  # - "first.rules"
+  # - "second.rules"
+
+# A scrape configuration containing exactly one endpoint to scrape:
+# Here it's Prometheus itself.
+scrape_configs:
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  - job_name: 'prometheus'
+
+    # metrics_path defaults to '/metrics'
+    # scheme defaults to 'http'.
+
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: 'docker'
+         # metrics_path defaults to '/metrics'
+         # scheme defaults to 'http'.
+
+    static_configs:
+      - targets: ['PRIVATEIP:9323']
+      
+      
+      
+  Step3:
+  ======
+  
+  docker service create --replicas 1 --name my-prometheus \
+    --mount type=bind,source=/tmp/prometheus.yml,destination=/etc/prometheus/prometheus.yml \
+    --publish published=9090,target=9090,protocol=tcp \
+    prom/prometheus
+  
+  
+  Access: publicIP:9090
+  
+ Step4:
+ =====
+ 
+ Use Prometheus
+Create a graph. Click the Graphs link in the Prometheus UI. Choose a metric from the combo box to the right of the Execute button, and click Execute. 
+ex:  engine_daemon_network_actions_seconds_count
+  
+Now Check Graph on Prom using below
+
+docker service create \
+  --replicas 4 \
+  --name ping_service \
+  alpine ping docker.com
+  
+  
+ Step5:
+ ======
+ 
+ docker run -d -p 3000:3000 grafana/grafana
+ 
+ Access: publicIP:3000
+ 
+ Go to Datasources, Add prometheus as DS. 
+ Create a Dashboard or import existing.
+ 
