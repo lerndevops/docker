@@ -1,0 +1,27 @@
+Working with Non-privileged Users
+In this lesson, you will learn how to use the USER instruction to create a non-privileged user. Rather than using root, we can use a non-privileged user to configure and run an application.
+
+Setup your environment:
+
+cd docker_images
+mkdir non-privileged-user
+cd non-privileged-user
+Create the Dockerfile:
+
+vi Dockerfile
+Dockerfile contents:
+
+# Creates a CentOS image that uses cloud_user as a non-privileged user
+FROM centos:latest
+RUN useradd -ms /bin/bash cloud_user
+USER cloud_user
+Build the new image:
+
+docker image build -t centos7/nonroot:v1 .
+Create a container using the new image:
+
+docker container run -it --name test-build centos7/nonroot:v1 /bin/bash
+Connecting as a privileged user:
+
+docker container start test-build
+docker container exec -u 0 -it test-build /bin/bash
