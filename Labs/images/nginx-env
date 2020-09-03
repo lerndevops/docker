@@ -1,10 +1,9 @@
 FROM ubuntu:bionic
 
-ENV NGINX_VERSION 1.10.3
 ENV trainer Ravi
 
 RUN apt-get update && apt-get install -y curl
-RUN apt-get update && apt-get install -y nginx=$NGINX_VERSION
+RUN apt-get update && apt-get install -y nginx
 
 WORKDIR /var/www/html/
 ADD index.html ./
