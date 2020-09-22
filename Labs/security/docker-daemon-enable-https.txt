@@ -1,0 +1,90 @@
+mkdir -p /home/certs
+
+Generate a certificate authority for your Docker server. 
+	Make sure you replace <server private IP> with the actual private IP of your server.
+
+openssl genrsa -aes256 -out ca-key.pem 4096
+openssl req -new -x509 -days 365 -key ca-key.pem -sha256 -out ca.pem -subj "/CN=$HOSTNAME/OU=devops"
+
+=====================================
+
+Generate server key and certificates for your Docker server. 
+	Make sure you replace <server private IP> with the actual private IP of your server.
+
+server key:
+	openssl genrsa -out server-key.pem 4096
+	
+server csr:
+	openssl req -subj "/CN=$HOSTNAME" -sha256 -new -key server-key.pem -out server.csr
+
+	create extfile
+		touch extfile.cnf
+		echo subjectAltName = DNS:$HOSTNAME,IP:<server private IP>,IP:127.0.0.1 >> extfile.cnf
+		echo extendedKeyUsage = serverAuth >> extfile.cnf
+
+server cert:
+	openssl x509 -req -days 365 -sha256 -in server.csr -CA ca.pem -CAkey ca-key.pem -CAcreateserial -out server-cert.pem -extfile extfile.cnf
+
+=====================================	
+
+generate the client certificates
+
+client key:
+	openssl genrsa -out key.pem 4096
+	
+client csr:
+	openssl req -subj '/CN=client' -new -key key.pem -out client.csr
+	
+	create extfile
+		echo extendedKeyUsage = clientAuth > extfile-client.cnf
+
+client cert:
+	openssl x509 -req -days 365 -sha256 -in client.csr -CA ca.pem -CAkey ca-key.pem -CAcreateserial -out cert.pem -extfile extfile-client.cnf
+	
+=======================================
+
+Set appropriate permissions on the certificate files:
+
+chmod -v 0400 ca-key.pem server-key.pem key.pem 
+chmod -v 0444 ca.pem server-cert.pem cert.pem
+
+===========================================
+
+Configure your Docker host to use tlsverify mode with the certificates that were created earlier:
+
+sudo vi /etc/docker/daemon.json
+
+{
+  "tlsverify": true,
+  "tlscacert": "/home/certs/ca.pem",
+  "tlscert": "/home/certs/server-cert.pem",
+  "tlskey": "/home/certs/server-key.pem"
+}
+
+sudo vi /lib/systemd/system/docker.service
+
+Look for the line that begins with ExecStart and change the -H so that it looks like this:
+
+ExecStart=/usr/bin/dockerd -H=0.0.0.0:4243 --containerd=/run/containerd/containerd.sock
+
+==============================================
+
+Copy the CA cert and client certificate files to the client machine:
+
+scp ca.pem cert.pem key.pem devops@<client private IP>:/home/devops
+
+On the client machine, configure the client to securely connect to the remote Docker daemon
+
+mkdir -pv ~/.docker
+cp ca.pem cert.pem key.pem ~/.docker
+
+export DOCKER_HOST=tcp://<docker server private IP>:4243
+
+test the connection to the server fails 
+docker ps ( should throw error )
+
+export DOCKER_TLS_VERIFY=1
+
+docker ps 
+
+
