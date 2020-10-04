@@ -1,0 +1,1095 @@
+Exam Breakdown
+Installation and Configuration
+1.
+Which of the following commands will run a busybox container and automatically delete it once it exits?
+
+A
+docker run --restart no busybox
+
+B
+docker run --rm busybox
+
+C
+docker run --rm --restart on-failure busybox
+
+D
+docker container rm busybox
+
+Correct Answer: B
+Why is this correct?
+The --rm flag instructs Docker to automatically delete the container once it exits.
+
+INCORRECT
+2.
+Amanda wants to execute a one-time job using a Docker container. However, occasionally, this job fails and needs to restart. Amanda doesn't want to restart it manually if it fails. Which command should she use to make sure that the container executes the one-time job successfully?
+
+A
+docker run --recover-failure cleanup-job
+
+B
+docker run --restart failure-only cleanup-job
+
+C
+docker run --restart unless-stopped cleanup-job
+
+D
+docker run --restart on-failure cleanup-job
+
+Your Answer: C
+Why is this incorrect?
+This restart policy will always restart the container even if it succeeds, running it multiple times when it should only run successfully once.
+
+Correct Answer: D
+Why is this correct?
+This restart policy will only restart the container if it exits with a non-zero exit code.
+
+3.
+How would we create a new swarm cluster?
+
+A
+Run docker cluster create.
+
+B
+Run docker swarm init.
+
+C
+Use a Docker compose file that defines a new cluster.
+
+D
+Start dockerd with the swarm=true flag.
+
+Correct Answer: B
+Why is this correct?
+This command creates a new cluster and generates the current node inside the first Swarm manager.
+
+INCORRECT
+4.
+How would we go about backing up images in the Docker Trusted Registry (DTR)?
+
+A
+Create a backup of everything in the DTR image storage volume.
+
+B
+Run a docker pull on all of the images to transfer them to another host.
+
+C
+Execute a container using the dtr image with the backup-images command.
+
+D
+Back up everything in /var/lib/docker/volumes.
+
+Your Answer: B
+Why is this incorrect?
+This would back up the images but would be a very inefficient method.
+
+Correct Answer: A
+Why is this correct?
+To back up images, back up the contents of the volume DTR used to store images.
+
+5.
+How should we give a user permission to interact with the Docker daemon on a machine without giving them unnecessary additional access?
+
+A
+Add the user to the docker group.
+
+B
+Give the user the ability to run docker commands with sudo.
+
+C
+Have them log in as the docker user.
+
+D
+Give the user the root user credentials so they can run docker commands as root.
+
+Correct Answer: A
+Why is this correct?
+Docker provides the docker group for the purpose of giving users permission to solely access Docker.
+
+6.
+Which Docker edition would we choose for obtaining the latest Docker Engine updates?
+
+A
+Docker Developer Edition (DE)
+
+B
+Docker Community Edition (CE)
+
+C
+Either Docker CE or Docker EE
+
+D
+Docker Enterprise Edition (EE)
+
+Correct Answer: C
+Why is this correct?
+Docker CE and EE both get all the latest engine updates.
+
+7.
+We have set a value for "log-level" in /etc/docker/daemon.json. How would we set up the same value by passing a flag to dockerd instead?
+
+A
+Pass the --log-level flag to dockerd.
+
+B
+Pass the --debug flag to dockerd.
+
+C
+Pass the --log flag to dockerd.
+
+D
+Pass the --logging flag to dockerd.
+
+Correct Answer: A
+Why is this correct?
+The dockerd flags share the same names as the values set in /etc/docker/daemon.json.
+
+8.
+What is the difference between a manager and a worker in Docker swarm?
+
+A
+Managers create new workers.
+
+B
+Managers handle networking, while workers handle containers.
+
+C
+Managers never execute containers, workers do.
+
+D
+Managers control the cluster, while workers only execute workloads.
+
+Correct Answer: D
+Why is this correct?
+This describes the roles of managers and workers in a swarm.
+
+9.
+Dylan is getting ready to run a container. He needs this container to auto-restart whenever its process exits, but he doesn't want it to restart if the container had manually stopped earlier. Which restart policy should he use?
+
+A
+manual-control
+
+B
+on-failure
+
+C
+always
+
+D
+unless-stopped
+
+Correct Answer: D
+Why is this correct?
+This restart policy will always restart the container unless it was stopped explicitly.
+
+10.
+Which of the following is not backed up when performing a Docker Trusted Registry (DTR) metadata backup?
+
+A
+DTR Configurations
+
+B
+Role-based access control (RBAC) settings.
+
+C
+Repository metadata.
+
+D
+Docker images.
+
+Correct Answer: D
+Why is this correct?
+A DTR metadata backup does not include the images themselves.
+
+Image Creation, Management, and Registry
+11.
+Which of the following is true about the creation of private Docker registries?
+
+A
+We can create our own registry by running a container with the registry image.
+
+B
+We need a Docker EE license to have our own private registry created.
+
+C
+We need Docker Trusted Registry (DTR) present if we want to generate a private registry.
+
+D
+We cannot secure a private registry in Docker Community Edition (CE).
+
+Correct Answer: A
+Why is this correct?
+Running this image will create a private Docker registry.
+
+12.
+Which of the following statements truly applies to the ENV directive?
+
+A
+It sets environment variables that are only visible at the container runtime.
+
+B
+It sets environment variables that are made available in subsequent build steps and to containers at the runtime.
+
+C
+It sets an environment variable on the host while the container is running.
+
+D
+It sets environment variables that are only visible during later build steps.
+
+Correct Answer: B
+Why is this correct?
+The ENV directive sets environment variables, and they're visible during subsequent build steps and at the container runtime.
+
+13.
+What is the primary purpose of a Docker registry?
+
+A
+It builds images.
+
+B
+It stores and organizes Dockerfiles.
+
+C
+It provides a central location for storing and distributing images.
+
+D
+Scan images for vulnerabilities.
+
+Correct Answer: C
+Why is this correct?
+This is what a Docker registry does.
+
+14.
+How can we use multi-stage builds to generate small, efficient Docker images?
+
+A
+We can leverage the implementation of multi-stage builds, which will shorten the build processing times.
+
+B
+We can use separate build stages to delete files from the image.
+
+C
+We can build the image, and then run diagnostics on it in a separate stage to make it more efficient.
+
+D
+We can copy only specific files from previous stages so that we can keep the image as small as possible.
+
+Correct Answer: D
+Why is this correct?
+This is the primary use case for multi-stage builds.
+
+15.
+How would we go about keeping track of changes made to an image in source control (i.e., git)?
+
+A
+We would store the Dockerfile in source control.
+
+B
+We would use Docker Trusted Registry (DTR) to handle this.
+
+C
+Maintain tags for each new version within the Docker registry.
+
+D
+We would push the image layers to a source control repository.
+
+Correct Answer: A
+Why is this correct?
+We can keep the Dockerfile in source control to track any changes made to the Dockerfile.
+
+INCORRECT
+16.
+What would be the runtime working directory of a container built from the following Dockerfile?
+
+FROM alpine
+
+WORKDIR /x
+WORKDIR /y
+WORKDIR z
+
+CMD pwd
+A
+/x
+
+B
+/z
+
+C
+/y/z
+
+D
+/
+
+Your Answer: B
+Why is this incorrect?
+WORKDIR z sets the directory relative to a previous WORKDIR.
+
+Correct Answer: C
+Why is this correct?
+This would be the runtime working directory because WORKDIR /y sets up an absolute directory, and then WORKDIR z sets the directory relative to /y.
+
+17.
+Which of the following commands will build an image from a Dockerfile located in the current directory and tag it as my-custom-image:1?
+
+A
+docker build -t my-custom-image:1 .
+
+B
+docker build .
+
+C
+docker build -tag my-custom-image:1 .
+
+D
+docker build -tag my-custom-image:1
+
+Correct Answer: A
+Why is this correct?
+This command will build the image and tag it appropriately.
+
+INCORRECT
+18.
+What does the EXPOSE directive do?
+
+A
+It documents ports intended for publishing at the time of running a container.
+
+B
+It makes a container's port accessible externally.
+
+C
+It causes the container to listen on a port.
+
+D
+It automatically publishes ports when running a container.
+
+Your Answer: B
+Why is this incorrect?
+The EXPOSE directive does not do this, for we must publish a port to make it accessible externally.
+
+Correct Answer: A
+Why is this correct?
+The EXPOSE directive documents the ports that should be published when running a container from the image.
+
+19.
+How is the ADD directive different from COPY? (Choose two)
+
+A
+The ADD directive can pull a file from an external URL.
+
+B
+The ADD directive can extract an archive into the image.
+
+C
+The ADD directive can transfer a specific file between build stages.
+
+D
+The ADD directive can transfer files over to a specific location inside the image.
+
+Correct Answer: A
+Why is this correct?
+The ADD directive can pull from a URL while COPY cannot.
+
+Correct Answer: B
+Why is this correct?
+The ADD directive can extract archives while COPY cannot.
+
+20.
+What command would we use to locate the layered file system data for an image on a machine?
+
+A
+docker layer inspect
+
+B
+docker pull history
+
+C
+docker image inspect
+
+D
+docker image layers
+
+Correct Answer: C
+Why is this correct?
+The docker image inspect command will return the image metadata, including the location of the layered file system data.
+
+Orchestration
+21.
+What command would we use to list the services that are part of a stack called web-store?
+
+A
+docker service ls web-store
+
+B
+docker stack ps web-store
+
+C
+docker stack services web-store
+
+D
+docker service ls
+
+Correct Answer: C
+Why is this correct?
+This command will list the services that are part of the stack.
+
+22.
+We have seven Swarm manager nodes total. How should we distribute them across just three availability zones?
+
+A
+5-1-1
+
+B
+4-2-1
+
+C
+3-2-2
+
+D
+6-1-0
+
+Correct Answer: C
+Why is this correct?
+This setup enables us to lose any of the availability zones and still maintain the quorum.
+
+23.
+What should we use if we need to run multiple copies of a single image in a swarm?
+
+A
+We should use a task.
+
+B
+We should use a service.
+
+C
+We should use a stack.
+
+D
+We should run the docker-compose command.
+
+Correct Answer: B
+Why is this correct?
+Services are used to run multiple replicas that use the same image.
+
+24.
+Sally wants to prevent Docker Swarm encryption keys from being stored insecurely on her swarm managers. How can she tackle enforcing a lock on the swarm cluster?
+
+A
+Sally cannot do this because Docker does not offer this functionality.
+
+B
+Sally can use the --autolock=true flag with the docker swarm update command.
+
+C
+Sally can locate the critical files after the installation and delete them.
+
+D
+The autolock feature must be turned on when the cluster is initialized and cannot be enabled after the fact.
+
+Correct Answer: B
+Why is this correct?
+This command will turn on --autolock, ensuring that managers will be automatically locked whenever the Docker daemon restarts.
+
+25.
+What command should we use if we want to view logs for all of the tasks in a service called my-service?
+
+A
+docker task logs my-service
+
+B
+docker logs my-service
+
+C
+docker service logs my-service
+
+D
+docker container logs my-service
+
+Correct Answer: C
+Why is this correct?
+This command will retrieve logs for all of the tasks in the service.
+
+26.
+Which of the following commands can we use to view detailed metadata about a container? (Choose two)
+
+A
+docker metadata
+
+B
+docker container inspect
+
+C
+docker query
+
+D
+docker inspect
+
+Correct Answer: B
+Why is this correct?
+This command will allow us to find metadata about any container.
+
+Correct Answer: D
+Why is this correct?
+This command will allow us to query metadata about any Docker object.
+
+27.
+What tool should we use if we need to manage a multi-container application as a unit on a single Docker host?
+
+A
+We should use Docker Swarm.
+
+B
+We should execute docker-run.
+
+C
+We should use a Docker stack.
+
+D
+We should use Docker Compose.
+
+Correct Answer: D
+Why is this correct?
+Docker Compose allows us to manage complex, multi-container applications on a single host.
+
+28.
+Which of the following scenarios would still allow the quorum to have maintenance in a swarm cluster? (Choose two)
+
+A
+A 3-node cluster with 2 nodes down.
+
+B
+A 4-node cluster with 2 nodes down.
+
+C
+A 7-node cluster with 3 nodes down.
+
+D
+A 3-node cluster with 1 node down.
+
+Correct Answer: C
+Why is this correct?
+More than half of the nodes are still up, so the quorum is maintained in this scenario.
+
+Correct Answer: D
+Why is this correct?
+More than half of the nodes are still up, so the quorum is maintained in this scenario.
+
+29.
+Which of the following commands will evenly spread out tasks based upon the values of a node label?
+
+A
+docker service create --placement-pref spread=node.labels.availability_zone nginx
+
+B
+docker service create --constraint spread=node.labels.availability_zone nginx
+
+C
+docker service create --placement-pref even-spread=node.labels.availability_zone nginx
+
+D
+docker service create --placement-pref spread nginx
+
+Correct Answer: A
+Why is this correct?
+This command will evenly spread out tasks based upon the values of the availability_zone label.
+
+30.
+What command will help us delete a service called my-service along with all of its tasks?
+
+A
+docker service rm -f my-service
+
+B
+docker service rm --all my-service
+
+C
+docker service rm my-service --cascade
+
+D
+docker service rm my-service
+
+Correct Answer: D
+Why is this correct?
+This command will delete the service and all of its tasks.
+
+Storage and Volumes
+31.
+Which of the following commands would we use to automatically identify and delete images that are not being used?
+
+A
+docker image prune
+
+B
+docker image rm --all
+
+C
+docker image rm
+
+D
+docker image rm -a
+
+Correct Answer: A
+Why is this correct?
+This command will delete any dangling images on the system.
+
+INCORRECT
+32.
+Which of the following is true of filesystem storage models? (Choose two)
+
+A
+They are used by overlay2 and aufs.
+
+B
+They use an external, object-based store.
+
+C
+They are efficient with write-heavy workloads.
+
+D
+They store data in regular files on the host machine.
+
+Your Answer: B
+Why is this incorrect?
+This is true of object storage, not filesystem storage.
+
+Correct Answer: A
+Why is this correct?
+The overlay2 and aufs storage drivers both use filesystem storage models.
+
+Correct Answer: D
+Why is this correct?
+Filesystem storage models simulate a file system and store the data in regular files onto the host machine.
+
+33.
+How would we create a volume called new-volume without running a container?
+
+A
+We would run docker volume create new-volume.
+
+B
+We would use docker run -v new-volume:/tmp nginx.
+
+C
+We would run docker run --rm -v new-volume:/tmp nginx.
+
+D
+We would run docker create volume new-volume.
+
+Correct Answer: A
+Why is this correct?
+This command will create a new volume without running a container.
+
+34.
+Which of the following commands would we use to locate the data for a volume on the host?
+
+A
+docker volume locate <volume>
+
+B
+docker volume navigate <volume>
+
+C
+docker volume inspect <volume>
+
+D
+docker volume logs <volume>
+
+Correct Answer: C
+Why is this correct?
+This command will provide the metadata for the volume, including the actual location of the data.
+
+35.
+Which devicemapper mode should we use for a production environment?
+
+A
+direct-lvm
+
+B
+loop-lvm
+
+C
+overlay2
+
+D
+block storage
+
+Correct Answer: A
+Why is this correct?
+We should use direct-lvm mode in a production environment.
+
+36.
+Which of the following commands can we use to locate the actual files that store a container's internal data?
+
+A
+docker container inspect <container>
+
+B
+docker volume ls
+
+C
+docker container volume ls
+
+D
+docker image inspect <image>
+
+Correct Answer: A
+Why is this correct?
+This command will return the container metadata, including the location of its data on the host.
+
+37.
+Which of the following commands would we use to retrieve a list of volumes on the current machine?
+
+A
+docker volume ps
+
+B
+docker volume rm
+
+C
+docker volume inspect
+
+D
+docker volume ls
+
+Correct Answer: D
+Why is this correct?
+This command will return a list of volumes on the current machine.
+
+38.
+Which storage driver is the default for current versions of CentOS/RHEL and Ubuntu?
+
+A
+aufs
+
+B
+direct-lvm
+
+C
+devicemapper
+
+D
+overlay2
+
+Correct Answer: D
+Why is this correct?
+The overlay2 storage driver is the default for current versions of CentOS/RHEL and Ubuntu.
+
+39.
+Anastasia has created a container with a volume called shared-data. She wants to create a new container that can access the same data as the first container, but she wants this new container only to be able to read the data, not modify it. How can she accomplish this?
+
+A
+Anastasia can use docker run --name new-container -v shared-data:/tmp:ro nginx.
+
+B
+This task is not possible for Anastasia to complete because we cannot mount the same volume to two containers.
+
+C
+Anastasia can use docker run --name new-container -v shared-data:/tmp nginx.
+
+D
+Anastasia can create a bind mount for the new container that points to the physical location of the shared volume on the host.
+
+Correct Answer: A
+Why is this correct?
+This command will mount the shared volume to the new container in read-only mode.
+
+40.
+Which of the following commands may result in the creation of a new named volume?
+
+A
+docker run -v /my-vol:/tmp:create nginx
+
+B
+docker run -v /my-vol:/tmp nginx
+
+C
+docker run --mount source=/my-vol,destination=/tmp nginx
+
+D
+docker run -v my-vol:/tmp nginx
+
+Correct Answer: D
+Why is this correct?
+This command will create a new volume called my-vol if one does not already exist under that name.
+
+Networking
+41.
+Which of the following commands will publish a service's port, but only on nodes that are running a task for that service?
+
+A
+docker service create -p mode=ingress,published=8082,target=80 nginx
+
+B
+docker service create -p mode=host,published=8082,target=80 nginx
+
+C
+docker service create -p 8080:80 --mode host nginx
+
+D
+docker service create -p 8080:80 nginx
+
+Correct Answer: B
+Why is this correct?
+Host publishing mode only publishes ports on nodes that are running a task for the service.
+
+42.
+Which of the following commands would we use to view a container's logs?
+
+A
+docker logs <container>
+
+B
+docker service logs <service>
+
+C
+docker container get-log
+
+D
+sudo journalctl -u docker
+
+Correct Answer: A
+Why is this correct?
+This command will return the container's logs.
+
+43.
+What concept in the Docker Container Network Model (CNM) refers to an isolated unit containing all networking components associated with a single container?
+
+A
+Network driver
+
+B
+Network
+
+C
+Endpoint
+
+D
+Sandbox
+
+Correct Answer: D
+Why is this correct?
+A sandbox is the isolated networking unit surrounding a single container.
+
+44.
+Which network driver connects containers directly to a network stack on the host machine without any isolation?
+
+A
+none
+
+B
+bridge
+
+C
+macvlan
+
+D
+host
+
+Correct Answer: D
+Why is this correct?
+The host network driver connects containers directly to the host's network devices without any isolation.
+
+45.
+Which of the following commands will attach the tasks of a new service to an existing overlay network called my-overlay?
+
+A
+docker service create --network-driver overlay nginx
+
+B
+docker service create --n my-overlay nginx
+
+C
+docker service create --network my-overlay nginx
+
+D
+docker service create --attach my-overlay nginx
+
+Correct Answer: C
+Why is this correct?
+This command will attach the service's tasks to a specified network.
+
+46.
+Which of the following commands will create a new bridge network?
+
+A
+docker network create --network-driver bridge my-network
+
+B
+docker network create my-network
+
+C
+docker network create --driver overlay my-network
+
+D
+docker network create --network bridge my-network
+
+Correct Answer: B
+Why is this correct?
+Since the bridge is the default, a new bridge network will generate even when --driver is not specified.
+
+47.
+Which of the following tasks can we perform to set a custom DNS server for a container?
+
+A
+We can use the --nameserver flag with docker run.
+
+B
+We can set "dns" in /etc/docker/daemon.json.
+
+C
+We can use the --dns flag with docker run.
+
+D
+We can use the --dns-override flag with docker run.
+
+Correct Answer: C
+Why is this correct?
+This method would allow us to set a custom DNS server for the container.
+
+48.
+Which of the following network drivers is the default for connecting containers on the same host?
+
+A
+overlay
+
+B
+host
+
+C
+macvlan
+
+D
+bridge
+
+Correct Answer: D
+Why is this correct?
+The bridge network driver is the default and is used to connect containers on the same host.
+
+49.
+Which of the following is true of a service that has a port published in ingress mode?
+
+A
+The service will only listen on worker nodes that are running the service's tasks and manager nodes.
+
+B
+The service will only listen on nodes that are running tasks associated with the service.
+
+C
+The service will listen on all nodes on the cluster.
+
+D
+The service will only listen on a manager.
+
+Correct Answer: C
+Why is this correct?
+With ingress mode services listen on all nodes in the cluster.
+
+50.
+Which of the following statements about the overlay network driver is accurate?
+
+A
+The network is set up on every node in the cluster as soon as the network faces creation.
+
+B
+Networking components are created on nodes dynamically when tasks get scheduled on the node.
+
+C
+The overlay driver only allows communication between containers running on the same host.
+
+D
+The network must be set up manually on each node.
+
+Correct Answer: B
+Why is this correct?
+The overlay network driver dynamically creates networking components on the node when a relevant task gets scheduled on that node.
+
+Security
+51.
+What is the name of Docker feature that enables us to sign images and verify image signatures before running them?
+
+A
+Docker Image Trust
+
+B
+Docker Content Trust
+
+C
+Docker Trusted Registry
+
+D
+Docker registry
+
+Correct Answer: B
+Why is this correct?
+Docker Content Trust allows us to sign images and verify signatures before running them.
+
+52.
+Tracy has a Docker Trusted Registry (DTR), and her development team has been mistakenly overwriting images in a repository by pushing a different image with an existing tag. How can she prevent this from happening?
+
+A
+Tracy can remove the team's access to the registry.
+
+B
+Tracy can make the repository private.
+
+C
+Tracy can back up the registry.
+
+D
+Tracy can mark the repository as immutable.
+
+Correct Answer: D
+Why is this correct?
+Marking the repository as immutable will prevent her team from overwriting existing tags.
+
+53.
+Which command allows us to create an encrypted overlay network?
+
+A
+docker network create --secure --driver overlay my-net
+
+B
+docker network create --opt encrypted --driver overlay my-net
+
+C
+docker network create --encrypted --driver overlay my-net
+
+D
+docker network create --opt encrypted my-net
+
+Correct Answer: B
+Why is this correct?
+This command will create an encrypted overlay network.
+
+54.
+How can you enable Docker Content Trust (DCT) in Docker Community Edition (CE)?
+
+A
+Set the CONTENT_TRUST environment variable to 1.
+
+B
+Set the DOCKER_CONTENT_TRUST environment variable to 1.
+
+C
+Set "content-trust": true in /etc/docker/daemon.json.
+
+D
+Pass the --content-trust flag to dockerd.
+
+Correct Answer: B
+Why is this correct?
+Setting this environment variable to 1 will enable DCT.
+
+55.
+Which of the following statements about grants in the Universal Control Plane (UCP) is accurate?
+
+A
+For each user, only one grant may be assigned.
+
+B
+Each grant refers to one or more roles.
+
+C
+Grants can give permissions to a user, team, or organization.
+
+D
+A grant provides permissions concerning precisely one object.

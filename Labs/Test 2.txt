@@ -1,0 +1,474 @@
+1. Which of the Dockerfile options initializes a new build stage and sets the base image for subsequent instructions?
+A	ONBUILD
+B	FROM
+C	RUN
+D	CMD
+
+Which of the following is NOT how to create an efficient image via a Dockerfile?
+Start with an appropriate base image
+Combine multiple applications into a single container
+Avoid installing unnecessary packages
+Use multi-stage builds
+
+
+What does docker image rm command do?
+Remove unused images
+Display detailed information on one or more images
+Remove one or more images
+Show the history of an image
+
+Which of the following docker image commands display detailed information on one or more images?
+docker image detail
+docker image ls
+docker image inspect
+docker image history
+
+ docker image prune command does?
+Show the history of an image
+Display detailed information on one or more images
+Remove one or more images
+Remove unused images
+
+Which of the Dockerfile options executes any commands in a new layer on top of the current image and commit the results?
+CMD
+FROM
+RUN
+ONBUILD
+
+Dockerfile option EXPOSE does?
+Label a container that will run as an executable
+Expose defaults for an executing container
+Informs Docker that the container listens on the specified network ports at runtime
+Adds metadata to an image
+
+
+Dockerfile option LABEL does?
+Provide defaults for an executing container
+Label a container that will run as an executable
+Tells Docker how to test a container to check that it is still working
+Adds metadata to an image
+
+which of the following Dockerfile options creates a mount point with the specified name and marks it as holding externally mounted volumes from native host or other containers?
+ONBUILD
+VOLUME
+RUN
+WORKDIR
+
+Dockerfile option EXPOSE publish the port to external systems. True or false?
+False
+True
+
+Each container shares common writeable container layer. True or false? F
+True
+False
+
+Docker image is built up from a series of layers and each layer represents an instruction in the image's Dockerfile. True or false?
+True
+False
+
+
+What is the docker command for displaying layers of a Docker image?
+docker image layers
+docker layers
+docker history
+docker info
+
+
+which of the following is the correct command to tag an image?  2
+docker tag TARGET_IMAGE[:TAG] SOURCE_IMAGE[:TAG]
+docker tag SOURCE_IMAGE[:TAG] TARGET_IMAGE[:TAG]
+docker build tag SOURCE_IMAGE[:TAG] TARGET_IMAGE[:TAG]
+docker tag image SOURCE_IMAGE[:TAG] TARGET_IMAGE[:TAG]
+
+
+Which is the docker command to remove one or more images?
+docker remove
+docker image rm
+docker delete
+docker image delete
+
+Which of the following is the correct command to store an image to a registry? 2
+docker upload [OPTIONS] NAME[:TAG]
+docker push [OPTIONS] NAME[:TAG]
+docker commit [OPTIONS] NAME[:TAG]
+docker store [OPTIONS] NAME[:TAG]
+
+Which is the image storage solution that is part of Docker Enterprise Edition called? 1
+Docker Trusted Registry
+Docker Hub
+Universal Control Plane
+Docker Registry
+
+Which of the following statements is incorrect? 1
+When a container is deleted, the writable layer is persisted.
+The column 'virtual size' of docker ps -s output shows the amount of data used for the read-only image data used by the container plus the container's writable layer 'size'.
+Copy-on-write is a Docker strategy of sharing and copying files for maximum efficiency.
+The column 'size' of docker ps -s output shows the amount of data that is used for the writable layer of each container.
+
+
+Which of the following is NOT a valid way to tag a Docker image? 4
+Tag an image referenced by image ID
+Tag an image referenced by Name and Tag
+Tag an image referenced by Name
+Tag an image referenced by user ID
+
+
+
+what is the function of docker inspect command? 3
+To display system-wide information
+To inspect changes to files or directories on a container's filesystem
+To return low-level information on Docker objects
+To manage Docker configs
+
+
+Which of the following is the docker command to enable autolock on an existing swarm cluster? 4
+docker swarm autolock
+docker swarm update --autolock-swarm=true
+docker swarm --autolock=true
+docker swarm update --autolock=true
+
+what is the default format of docker inspect output? 2
+xml
+json
+yaml
+html
+
+
+what are the two types of docker swarm services? 3
+local and global services
+replicated and local services
+replicated and global services
+distributed and replicated services
+
+what is the difference between a replicated and a global service? 3
+Replicated service runs one task on every node. Global service runs multiple task on every node.
+Good candidates for replicated service are monitoring agents that you want to run on every node in the swarm. Good candidates for global service are http servers.
+Number of identical tasks can be specified for a replicated service. There is no pre-specified number of tasks for global service.
+Replicated service can only be deployed on manager node. Global service can be deployed on both manager and worker node.
+
+what is the docker command to add or update a placement constraint? 1
+docker service update --constraint-add
+docker service update --placement-constraint-add
+docker service update --placement-pref-add
+docker service update --pref-add
+
+what is the docker command to increase number of replicas? 1
+docker service scale
+docker service replica
+docker service build
+docker service increase
+
+what is the docker command to add a placement preference? 3
+docker service update --constraint-add
+docker service update --placement-constraint-add
+docker service update --placement-pref-add
+docker service update --pref-add
+
+
+what is the docker command to add a network to a service? 2
+docker service add-network
+docker service update --network-add
+docker service set --add-network
+docker service modify --add-network
+
+
+what is the docker command to update an existing service?  4
+docker service config
+docker service change
+docker service modify
+docker service update
+
+
+What is the docker command to add or update a node label? 1
+docker node update --label-add
+docker node update --set-label
+docker node add --label
+docker node modify --set-label
+
+
+what is the docker command to add or update a published port? 3
+docker service update --publish-port
+docker service modify --add-update-port
+docker service update --publish-add
+docker service set --add-port
+
+
+what is the docker command to add or update a mount on a service?  1
+docker service update --mount-add
+docker service set --add-update-mount
+docker service --mount-volume
+docker service --add-update-mount
+
+what is the docker command to roll back to the previous version of a service? 4
+docker service --rollback-version
+docker service update --rollback-version
+docker service --rollback
+docker service update --rollback
+
+
+which of the following is NOT true about Raft (docker consensus algorithm)? 1
+Raft tolerates up to (N-2)/2 failures
+If a quorum is not reached, the existing tasks will keep running
+If a quorum is not reached, the system will not process any more requests to schedule additional tasks
+Raft requires a majority or quorum of (N/2) + 1 members
+
+what is the correct order to upgrade a Docker cluster? 2
+Upgrade UCP, DTR, then engine and kernel
+Upgrade engine and kernel, UCP, and then DTR
+Upgrade DTR, UCP, then engine and kernel
+Upgrade engine and kernel, DTR, and then UCP
+
+How to configure the default logging driver? 2
+Use --log-driver flag
+Set the "log-driver" option in the daemon.json file
+
+
+what is the docker command to backup the UCP? 1
+docker/ucp backup
+docker backup ucp
+
+what is the docker command to find the current logging driver for a running container? 4
+docker info
+docker config
+docker stats
+docker inspect
+
+
+what is the docker command to setup a swarm? 1
+docker swarm init
+docker swarm create
+docker init swarm
+docker create swarm
+
+what are the requirements to install Docker Trusted Registry (DTR)? (Select all that apply) 1,3,4
+All nodes must have a fixed hostname
+Make sure the port 8080 and 8443 are open on the node
+All nodes must be a worker node managed by Universal Control Plan
+DTR can be installed on-premises or on a cloud provider
+
+what is the correct order to backup Docker EE components? 4
+Back up DTR, UCP, then swarm
+Back up UCP, swarm, then DTR
+Back up swarm, DTR, then UCP
+Back up swarm, UCP, then DTR
+
+what is the docker command to see the storage driver Docker is currently using? 2
+docker stats
+docker info
+docker config
+docker inspect
+
+what is the recommended approach to set storage driver? 1
+Set the "storage-driver" option in the daemon.json file
+Use --storage-driver flag when running dockerd
+
+what is the docker command to add a node to a swarm? 3
+docker swarm create-node
+docker join swarm
+docker swarm join
+docker swarm add-node
+
+which of the following is how to configure the Docker daemon to start on boot? (select two)1,3
+Use systemd for most current Linux distributions (RHEL, CentOS, Fedora, Ubuntu 16.04 and higher)
+Use crond for Ubuntu 14.10 and below
+Use upstart for Ubuntu 14.10 and below
+Use startup for most current Linux distributions (RHEL, CentOS, Fedora, Ubuntu 16.04 and higher)
+
+you can monitor the status of UCP by using the web UI or the CLI. True or false? 2
+False
+True
+
+which of the following items need to be considered before installing Docker Enterprise?  5
+Network ports
+Docker Engine, DTR, and UCP version compatibility
+Disk space
+Time Synchronization
+All of the options
+
+which of the following tool to use to create users and teams?  1
+Universal Control Plane (UCP)
+Docker Compose
+Docker Machine
+Docker Trusted Registry (DTR)
+
+What is the endpoint that we can use to check the health of a single UCP manager node? 3
+https:///_status
+https:///_health
+https:///_ping
+https:///_heartbeat
+
+
+what is the docker command to see container logs? 3
+docker debug
+docker dump-logs
+docker logs
+docker fetch-logs
+
+
+what is the docker command to create a bridge network?  2
+docker network add
+docker network create
+docker network deploy
+docker create network
+
+
+which of the following statements is false?  2
+User-defined bridges provide better isolation and interoperability between containerized applications
+Containers can NOT be attached and detached from user-defined networks on the fly
+Each user-defined network creates a configurable bridge
+Linked containers on the default bridge network share environment variables
+User-defined bridges provide automatic DNS resolution between containers
+
+what is the docker command to display detailed information on one or more networks? 1
+docker network inspect
+docker network status
+docker inspect network
+docker network display
+
+
+which network driver type is best when you need multiple containers to communicate on the same Docker host?  4
+Host networks
+Macvlan networks
+Overlay networks
+User-defined bridge networks
+
+Which of the following docker command can be used to find out all the ports mapped? (select three) 2,3,4
+docker network ls
+docker port
+docker inspect
+docker ps
+
+
+which network driver type is best when you are migrating from a VM setup or need your containers to look like physical hosts on your network, each with a unique MAC address? 3
+Overlay networks
+Host networks
+Macvlan networks
+User-defined bridge networks
+
+
+which network driver type is best when the network stack should not be isolated from the Docker host, but you want other aspects of the container to be isolated?  4
+Overlay networks
+Macvlan networks
+User-defined bridge networks
+Host networks
+
+What is the docker run option to publish a port so that an application is accesible externally?  1
+docker run --publish
+docker run --open-port
+docker run --publish-port
+docker run --expose
+
+
+which network driver type is best when you need containers running on different Docker hosts to communicate, or when multiple applications work together using swarm services?  3
+User-defined bridge networks
+Macvlan networks
+Overlay networks
+Host networks
+
+
+what is the docker command to connect a running container to an existing user-defined bridge?  2
+docker connect network
+docker network connect
+docker network attach
+docker network join
+
+
+what is the command to set DNS server for all Docker containers?   4
+dockerd --set-dns IP_ADDRESS
+dockerd --dns-server IP_ADDRESS
+dockerd --dns-update IP_ADDRESS
+dockerd --dns IP_ADDRESS
+
+
+which of the following is NOT one of the 3 main Docker Container Network Model components?  2
+Network
+Routing
+Sandbox
+Endpoint
+
+
+what is the docker command to create a container with custom DNS server(s)?  1
+docker container create --dns=IP_ADDRESS
+docker container create --custom-dns=IP_ADDRESS
+docker container create --set-dns=IP_ADDRESS
+docker container create --add-dns=IP_ADDRESS
+
+publishing a service's port using the routing mesh makes the service accessible at the published port on every swarm node. True or false?  1
+True
+False
+
+
+what type of network is ingress network?  2
+bridge network
+overlay network
+host network
+macvlan network
+
+what is a grant made up of in Docker's Role Based Access Controls (RBAC)? (select three) 1,3,4
+Subject
+Certificate
+Role
+Resource collection
+
+what is the command that need to be executed to sign an image before pushing it to repository?  2
+export TRUST_DOCKER_CONTENT=1
+export DOCKER_CONTENT_TRUST=1
+export TRUST_DOCKER_IMAGE=1
+export SIGN_DOCKER_IMAGE=1
+
+what are the steps needed to sign images in a way that UCP trusts them? (select three) 2,3,4
+Approve image sign on UCP
+Delegate signing to the keys in your UCP client bundle
+Initialize trust metadata for the repository
+Configure Notary client
+
+
+Docker security scan result is available in both UCP and DTR. True or false? 2
+True
+False
+
+
+what are the two types of UCP client bundles?  3
+Docker CLI bundles and Docker web UI bundles
+Docker UCP client bundles and DTR client bundles
+Admin user certificate bundles and user certificate bundles
+Ops client bundles and dev client bundles
+
+
+Where is the option to integrate Docker Enterprise with LDAP?   2
+Docker Machine
+Universal Control Plane
+Docker Trusted Registry
+Docker Compose
+
+
+Where do you create Docker Role Based Access Controls (RBAC)?  4
+Docker Machine
+Docker Trusted Registry
+Docker Compose
+Universal Control Plane
+
+What is the difference between UCP workers and managers?  2
+ucp-agent service automatically starts serving all UCP components in worker node, and only a proxy service in manager node
+ucp-agent service automatically starts serving all UCP components in manager node, and only a proxy service in worker node
+
+Docker security scan can be started by all users including those with read-only access. True or false? 1
+False
+True
+
+Which of the followings are Docker Engine Security features? (select all that apply)  all 4
+You can protect the Docker daemon socket and ensure only trusted Docker client connections
+You can use certificate-based client-server authentication to verify a Docker daemon has the rights to access images on a registry
+You can configure Docker’s trust features so that your users can push and pull trusted images
+You can configure secure computing mode (Seccomp) policies to secure system calls in a container
+
+
+
+
+
+
+
+
+
+
+
