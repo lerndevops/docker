@@ -38,16 +38,15 @@ spec:
     installFlags:
       - --admin-username=admin
       - --admin-password=passw0rd!
-      - --default-node-orchestrator=kubernetes
-      - --pod-cidr 10.0.0.0/16
+      - --default-node-orchestrator=swarm
   hosts:
-  - address: 192.168.110.100
+  - address: 10.154.0.10
     role: manager
     ssh:
       keyPath: /home/devops/.ssh/id_rsa
       user: devops
     privateInterface: ens4
-  - address: 192.168.110.101
+  - address: 10.154.0.11
     role: worker
     ssh:
       keyPath: /home/devops/.ssh/id_rsa
