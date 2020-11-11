@@ -7,3 +7,8 @@ FROM tomcat:8.5
 WORKDIR /usr/local/tomcat/webapps/
 COPY --from=stage1 /petclinic/target/petclinic.war .    # importing the .war from build stage
 
+
+
+##RUN git clone -b docker https://<token>:x-oauth-basic@github.com/username/myapp.git /myapp/       -----> for private repos
+
+
