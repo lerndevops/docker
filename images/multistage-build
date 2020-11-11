@@ -1,0 +1,9 @@
+FROM maven:3.6.2-jdk-8 AS stage1                         # stage1 is an alias name for build stage
+RUN git clone http://github.com/lerndevops/petclinic
+WORKDIR  /petclinic
+RUN mvn package
+
+FROM tomcat:8.5
+WORKDIR /usr/local/tomcat/webapps/
+COPY --from=stage1 /petclinic/target/petclinic.war .    # importing the .war from build stage
+
