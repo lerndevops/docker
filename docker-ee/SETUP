@@ -35,10 +35,11 @@ metadata:
   name: my-ucp
 spec:
   ucp:
+    version: 3.3.2
     installFlags:
       - --admin-username=admin
       - --admin-password=passw0rd!
-      - --default-node-orchestrator=swarm
+      - --default-node-orchestrator=kubernetes
   hosts:
   - address: 10.154.0.10
     role: manager
