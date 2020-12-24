@@ -1,5 +1,5 @@
 #!/bin/bash
-
+## This script works for Ubuntu only. 
 ## Remove any pre installed docker packages : 
 
 sudo apt-get remove docker docker-engine docker.io containerd runc
