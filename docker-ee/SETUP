@@ -29,31 +29,35 @@ Step 4:
 1. be the user you created,configured the key with
 2. Configure a new file with name "launchpad.yaml" with below content. (The full set of options is here : https://github.com/Mirantis/launchpad/blob/master/docs/configuration-file.md) 
 
-apiVersion: launchpad.mirantis.com/v1
-kind: DockerEnterprise
+apiVersion: launchpad.mirantis.com/mke/v1.3
+kind: mke
 metadata:
-  name: my-ucp
+ name: my-mke-cluster
 spec:
-  ucp:
-    version: 3.3.2
+  mke:
+    version: 3.3.5
     installFlags:
       - --admin-username=admin
-      - --admin-password=passw0rd!
-      - --default-node-orchestrator=kubernetes
+      - --admin-password=admin@1234
   hosts:
-  - address: 10.154.0.10
-    role: manager
+  - role: manager
     ssh:
+      address: 10.168.0.2
       keyPath: /home/devops/.ssh/id_rsa
       user: devops
-    privateInterface: ens4
-  - address: 10.154.0.11
-    role: worker
+      port: 22
+  - role: worker
     ssh:
+      address: 10.168.0.3
       keyPath: /home/devops/.ssh/id_rsa
       user: devops
-    privateInterface: ens4
-    
+      port: 22
+  - role: worker
+    ssh:
+      address: 10.168.0.4
+      keyPath: /home/devops/.ssh/id_rsa
+      user: devops
+      port: 22
     
 Step3:
 ======
