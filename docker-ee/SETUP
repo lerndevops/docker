@@ -5,19 +5,22 @@ Step1:
 ======
 
 Take minimum 3 servers.
-1. sample server for download launchpad 
-2. Docker Manager (UCP). 8G RAM and 10G disk
-3. Docker Worker (for DTR) 4G RAM
 
+1. Swarm Manager (UCP). 2CPU 8GB RAM and 25G disk & also we can use install the launchpad tool 
+2. Worker (for DTR). 2CPU, 4GB RAM and 40GB disk 
+2. Worker for app (any size) 
 
 Step2:
 ======
- Set-up a common user and configure SSH connecion using ssh-keygen and ssh-copy-id.
+Set-up a common user and configure SSH connecion using ssh-keygen and ssh-copy-id.
+
+follow the instructions: https://github.com/lerndevops/labs/blob/master/ansible/install/ssh-keys-setup.md 
  
 Step3:
 ======
 
-On sample server :
+On Swarm Manager VM :
+
 1. sudo wget https://github.com/Mirantis/launchpad/releases/latest/download/launchpad-linux-x64
 2. mv launchpad-linux-x64 launchpad
 3. mv launchpad /usr/bin
