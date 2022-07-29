@@ -76,7 +76,7 @@ client cert:
 
 Set appropriate permissions on the certificate files:
 
-chmod -v 0400 key.pem 
+chmod -v 0400 key.pem ca.pem
 chmod -v 0444 cert.pem
 
 ==============================================
