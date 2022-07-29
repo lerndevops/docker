@@ -49,9 +49,12 @@ sudo vi /etc/docker/daemon.json
 
 sudo vi /lib/systemd/system/docker.service
 
-Look for the line that begins with ExecStart and change the -H so that it looks like this:
+Look for the line that begins with ExecStart and change as below so that it looks like this:
 
-ExecStart=/usr/bin/dockerd -H=0.0.0.0:4243 --containerd=/run/containerd/containerd.sock
+ExecStart=/usr/bin/dockerd -H 0.0.0.0:4243 -H fd:// --containerd=/run/containerd/containerd.sock
+
+systemctl daemon-reload
+systemctl restart docker
 
 =====================================	
 
