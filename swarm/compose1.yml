@@ -1,4 +1,3 @@
-version: "3.7"
 services:
   web:
     # replace username/repo:tag with your name and image details

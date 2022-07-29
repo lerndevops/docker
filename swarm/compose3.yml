@@ -1,4 +1,8 @@
-version: "3"
+networks:
+  frontend:
+  backend:
+volumes:
+  db-data:
 services:
 
   redis:
@@ -84,11 +88,4 @@ services:
     deploy:
       placement:
         constraints: [node.role == manager]
-
-networks:
-  frontend:
-  backend:
-
-volumes:
-  db-data:
 

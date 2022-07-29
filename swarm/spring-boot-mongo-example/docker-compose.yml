@@ -1,4 +1,3 @@
-version: '3.7'
 services:
   springbootapp:
     image: lerndevops/springboot-mongo-app:latest
