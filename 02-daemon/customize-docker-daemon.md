@@ -1,6 +1,12 @@
 # customize the docker daemon process 
 
 ```
+{
+  "data-root": "/new_dir_structure/docker"
+}
+
+```
+```
 # Enable debugging of docker daemon 
 
 vi /etc/docker/daemon.json
