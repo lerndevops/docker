@@ -1,3 +1,7 @@
+version: '3'
+volumes:
+  data:
+  data-bkp:
 services:
   springbootapp:
     image: lerndevops/samples:springboot-app
@@ -27,6 +31,6 @@ services:
         condition: on-failure
     ports: 
       - "27017:27017"
-#    volumes:
-#      - data:/data/db
-#      - data-bkp:/data/bkp
+    volumes:
+      - data:/data/db
+      - data-bkp:/data/bkp
